@@ -38,9 +38,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
-
-
     // on create of instance -> create databases.
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -57,14 +54,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE);
-
         // Create tables again
         onCreate(db);
     }
 
     // DATABASE HANDLING
-    // Adding new contact
 
+    // Adding new contact
     public void addContact(Contact contact) {
         SQLiteDatabase db = this.getWritableDatabase(); // open db
         ContentValues values = new ContentValues(); // prepare list of values to add;

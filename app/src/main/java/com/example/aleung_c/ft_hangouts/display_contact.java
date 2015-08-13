@@ -1,11 +1,16 @@
 package com.example.aleung_c.ft_hangouts;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 
 public class display_contact extends Activity {
@@ -15,8 +20,18 @@ public class display_contact extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_contact);
 
+        DatabaseHandler db = new DatabaseHandler(this);
+
         Intent intent = getIntent();
-        String message = intent.getStringExtra("CONTACT_NAME");
+        int id_to_display = (int) intent.getExtras().getInt("CONTACT_ID");
+        Contact contact_to_display = db.getContact(id_to_display);
+
+        // Displaying infos //
+        TextView name = (TextView) findViewById(R.id.contact_name);
+        name.setText(contact_to_display.getName());
+
+        TextView number = (TextView) findViewById(R.id.contact_nb);
+        number.setText(contact_to_display.getPhonenb());
     }
 
     @Override
@@ -39,5 +54,44 @@ public class display_contact extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void Onclick_edit(View v) {
+
+    }
+
+    public void Onclick_delete(View v) {
+        final DatabaseHandler db = new DatabaseHandler(this);
+
+        Intent intent = getIntent();
+        int id_to_display = (int) intent.getExtras().getInt("CONTACT_ID");
+        final Contact contact_to_display = db.getContact(id_to_display);
+
+        // alert dialog
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Delete contact ?");
+        alertDialog.setMessage("Are you sure you want to delete this contact?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    // delete from db
+                    db.deleteContact(contact_to_display);
+                        back_to_list();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public void back_to_list() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

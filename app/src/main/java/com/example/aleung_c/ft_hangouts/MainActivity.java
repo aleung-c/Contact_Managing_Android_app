@@ -76,17 +76,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-//        LinearLayout linearLayout = new LinearLayout(this);
-//        setContentView(linearLayout);
-//        linearLayout.setOrientation(LinearLayout.VERTICAL);
-
         String name = (String) parent.getItemAtPosition(position).toString();
-//        TextView text = new TextView(this);
-
+        Contact contact = (Contact) parent.getItemAtPosition(position);
+        int id_to_display = contact.getId();
 
         Intent intent = new Intent(this, display_contact.class);
 
         intent.putExtra("CONTACT_NAME", name);
+        intent.putExtra("CONTACT_ID", (int)id_to_display);
         startActivity(intent);
     }
 }
