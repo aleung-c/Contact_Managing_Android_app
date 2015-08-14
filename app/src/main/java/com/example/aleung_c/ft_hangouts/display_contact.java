@@ -90,6 +90,15 @@ public class display_contact extends Activity {
         alertDialog.show();
     }
 
+    public void goto_edit_contact(View v) {
+        Intent prev_intent = getIntent();
+        int id_to_display = (int) prev_intent.getExtras().getInt("CONTACT_ID");
+        Intent intent = new Intent(this, add_contact.class);
+        intent.putExtra("ADDCONTACT_ACTION", "EDIT");
+        intent.putExtra("EDITCONTACT_ID",  (int)id_to_display);
+        startActivity(intent);
+    }
+
     public void back_to_list() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

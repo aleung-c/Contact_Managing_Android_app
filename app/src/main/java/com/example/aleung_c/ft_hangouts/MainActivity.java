@@ -70,6 +70,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public void goto_add_contact(View v)
     {
         Intent intent = new Intent(this, add_contact.class);
+        intent.putExtra("ADDCONTACT_ACTION", "ADD");
         startActivity(intent);
     }
 

@@ -61,7 +61,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center"
-                android:onClick=""
+                android:onClick="goto_edit_contact"
                 android:text="@string/display_contact_edit_btn" />
             <!-- Delete button -->
             <Button

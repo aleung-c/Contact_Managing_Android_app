@@ -17,6 +17,22 @@ public class add_contact extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
+
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        Intent intent = getIntent();
+        if (getIntent().getExtras().getString("ADDCONTACT_ACTION") == "EDIT") {
+            int id_to_display = (int) intent.getExtras().getInt("CONTACT_ID");
+            Contact contact_to_display = db.getContact(id_to_display);
+
+            // Displaying infos //
+            EditText name = (EditText) findViewById(R.id.name_field);
+            name.setText(contact_to_display.getName());
+
+            EditText number = (EditText) findViewById(R.id.number_field);
+            number.setText(contact_to_display.getPhonenb());
+        }
+        db.close();
     }
 
     @Override
@@ -43,6 +59,8 @@ public class add_contact extends Activity {
 
    public void Submit(View view) {
        DatabaseHandler db = new DatabaseHandler(this);
+
+
        Contact contact_added = new Contact();
 
 
@@ -53,8 +71,12 @@ public class add_contact extends Activity {
        {
            contact_added.setName(name_field.getText().toString());
            contact_added.setPhonenb(number_field.getText().toString());
-           db.addContact(contact_added);
-
+           if (getIntent().getExtras().getString("ADDCONTACT_ACTION") == "ADD") {
+               db.addContact(contact_added);
+           } else if (getIntent().getExtras().getString("ADDCONTACT_ACTION") == "EDIT")
+           {
+            db.updateContact(db.getContact(getIntent().getExtras().getInt("EDITCONTACT_ID")));
+            }
            Intent intent = new Intent(this, MainActivity.class);
            intent.putExtra("CONTACT_ADDED", "true");
            db.close();
