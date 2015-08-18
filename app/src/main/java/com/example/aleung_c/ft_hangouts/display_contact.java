@@ -1,5 +1,6 @@
 package com.example.aleung_c.ft_hangouts;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,6 +21,8 @@ public class display_contact extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_contact);
 
+
+
         DatabaseHandler db = new DatabaseHandler(this);
 
         Intent intent = getIntent();
@@ -37,8 +40,8 @@ public class display_contact extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_display_contact, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -75,8 +78,8 @@ public class display_contact extends Activity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                    // delete from db
-                    db.deleteContact(contact_to_display);
+                        // delete from db
+                        db.deleteContact(contact_to_display);
                         back_to_list();
                     }
                 });

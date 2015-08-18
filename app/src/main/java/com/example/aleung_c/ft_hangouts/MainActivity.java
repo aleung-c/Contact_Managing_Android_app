@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.app.ActionBar;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +24,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        ActionBar actionBar = getActionBar();
+//        assert actionBar != null;
+//        actionBar.setDisplayHomeAsUpEnabled(true);
 
         DatabaseHandler db = new DatabaseHandler(this);
         List<Contact> contacts = db.getAllContacts();
@@ -36,8 +42,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+//        getMenuInflater().inflate(R.menu.main_activity_actions, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -86,5 +94,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         intent.putExtra("CONTACT_NAME", name);
         intent.putExtra("CONTACT_ID", (int)id_to_display);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        System.exit(0);
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,16 +22,23 @@ public class add_contact extends Activity {
         DatabaseHandler db = new DatabaseHandler(this);
 
         Intent intent = getIntent();
-        if (getIntent().getExtras().getString("ADDCONTACT_ACTION") == "EDIT") {
-            int id_to_display = (int) intent.getExtras().getInt("CONTACT_ID");
+        if (getIntent().getExtras().getString("ADDCONTACT_ACTION").equals("EDIT")) {
+            setTitle(R.string.title_activity_edit_contact);
+            int id_to_display = (int) intent.getExtras().getInt("EDITCONTACT_ID");
             Contact contact_to_display = db.getContact(id_to_display);
 
             // Displaying infos //
+            TextView intro_txt = (TextView) findViewById(R.id.add_contact_intro);
+            intro_txt.setText(R.string.edit_contact_page_intro);
+
             EditText name = (EditText) findViewById(R.id.name_field);
             name.setText(contact_to_display.getName());
 
             EditText number = (EditText) findViewById(R.id.number_field);
             number.setText(contact_to_display.getPhonenb());
+
+            Button submit_btn = (Button) findViewById(R.id.add_contact_submit_btn);
+            submit_btn.setText(R.string.confirm_edit_btn);
         }
         db.close();
     }
@@ -67,16 +75,20 @@ public class add_contact extends Activity {
        EditText name_field = (EditText) findViewById(R.id.name_field);
        EditText number_field = (EditText) findViewById(R.id.number_field);
 
-       if (are_fields_OK(name_field, number_field) == true)
+       if (are_fields_OK(name_field, number_field))
        {
+           // set contact values
            contact_added.setName(name_field.getText().toString());
            contact_added.setPhonenb(number_field.getText().toString());
-           if (getIntent().getExtras().getString("ADDCONTACT_ACTION") == "ADD") {
+
+           if (getIntent().getExtras().getString("ADDCONTACT_ACTION").equals("ADD")) {
                db.addContact(contact_added);
-           } else if (getIntent().getExtras().getString("ADDCONTACT_ACTION") == "EDIT")
+           } else if (getIntent().getExtras().getString("ADDCONTACT_ACTION").equals("EDIT"))
            {
-            db.updateContact(db.getContact(getIntent().getExtras().getInt("EDITCONTACT_ID")));
-            }
+               // set contact id for updating
+               contact_added.setId(db.getContact(getIntent().getExtras().getInt("EDITCONTACT_ID")).getId());
+               db.updateContact(contact_added);
+           }
            Intent intent = new Intent(this, MainActivity.class);
            intent.putExtra("CONTACT_ADDED", "true");
            db.close();
