@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ft_hangouts</string>
+
+    <!-- Top Action bar -->
+
+    <string name="action_search">action search</string>
+
+    <!-- Main activity -->
+    <!-- Display contact list -->
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Préférences</string>
+    <string name="buttontest1">Ajouter un nom</string>
+    <string name="hint">Nom</string>
+
+    <string name="title_activity_display_contacts">Afficher les contacts</string>
+    <string name="display_contacts_btn">Chercher un contact</string>
+    <string name="add_contact_btn">Ajouter un contact</string>
+
+    <string name="write_msg_btn">Nouveau message</string>
+
+
+
+    <!-- Contact Management activity -->
+    <string name="title_activity_add_contact">Ajouter un contact</string>
+    <string name="title_activity_edit_contact">Editer le contact</string>
+
+    <string name="edit_contact_page_intro">Editer les informations</string>
+    <string name="add_contact_page_intro">Ajouter un nouveau contact</string>
+    <string name="add_contact_name_label">Nom:</string>
+    <string name="add_contact_nb_label">Num tel :</string>
+    <string name="confirm_add_btn">Ajouter un contact</string>
+    <string name="confirm_edit_btn">Editer</string>
+
+    <string name="add_contact_fields_empty">Des champs sont incomplets !</string>
+
+    <!-- Display one contact -->
+    <string name="title_activity_display_contact">Page contact</string>
+    <string name="display_contact_page_title">Page contact</string>
+    <string name="display_contact_name_label">Nom:</string>
+    <string name="display_contact_nb_label">Num tel :</string>
+    <string name="display_contact_edit_btn">Editer le contact</string>
+    <string name="display_contact_delete_btn">Supprimer Contact</string>
+
+    <string name="Delete_window_title">Supprimer contact ?</string>
+    <string name="Delete_window_msg">Etes vous sur de vouloir supprimer le contact ?</string>
+    <string name="txt_yes">Oui</string>
+    <string name="txt_no">Non</string>
+
+    <!-- write new message activity -->
+    <string name="title_activity_write_msg">Ecrire un message</string>
+</resources>

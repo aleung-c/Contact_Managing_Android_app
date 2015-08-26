@@ -24,11 +24,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String KEY_name = "name";               // string 1
     public static final String KEY_Phonenb = "phone_number";    // string 2
 
-    // property help us to keep data
-    public int contact_ID;
-    public String contact_name;
-    public int contact_phonenb;
-
     // constructor
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -97,7 +92,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All Contacts
     public List<Contact> getAllContacts() {
-        List<Contact> contactList = new ArrayList<Contact>(); // list to return;
+        List<Contact> contactList = new ArrayList<>(); // list to return;
         SQLiteDatabase db = this.getWritableDatabase(); // open db to fetch all contacts;
         String selectQuery = "SELECT  * FROM " + TABLE; // SQL request;
 
@@ -110,6 +105,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 contact.setId(Integer.parseInt(cursor.getString(0)));
                 contact.setName(cursor.getString(1));
                 contact.setPhonenb(cursor.getString(2));
+                // Adding contact to list
+                contactList.add(contact);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return contactList;
+    }
+
+    // get contacts from name
+    public List<Contact> getAllContactsfromName(String name_asked) {
+        List<Contact> contactList = new ArrayList<>(); // list to return;
+        SQLiteDatabase db = this.getWritableDatabase(); // open db to fetch all contacts;
+        String selectQuery = "SELECT  * FROM " + TABLE +
+                " WHERE " + KEY_name +
+                " LIKE '%" + name_asked + "%'"; // SQL request;
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) { // cursor on first element;
+            do {
+                Contact contact = new Contact();
+                contact.setId(Integer.parseInt(cursor.getString(0)));
+                contact.setName(cursor.getString(1));
+                contact.setPhonenb(cursor.getString(2));
+
                 // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());

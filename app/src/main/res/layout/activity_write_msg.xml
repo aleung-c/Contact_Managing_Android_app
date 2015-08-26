@@ -4,28 +4,66 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.aleung_c.ft_hangouts.write_msg">
+    tools:context="com.example.aleung_c.ft_hangouts.write_msg"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="fill_content"
-        android:layout_height="fill_content"
-        android:orientation="vertical"
-        android:background="#00FFFF">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
         <!-- Contact Name textview -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/write_msg_contact_label"/>
         <AutoCompleteTextView
             android:id="@+id/write_msg_name_select"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:background="#FFFFFF"/>
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/write_msg_search_hint"
+            android:background="#FFFFFF"
+            android:textColor="#000000"
+            android:padding="2dp"
+            android:layout_marginTop="3dp"
+            android:maxLines="1"
+            android:inputType="textPersonName"/>
+
+        <TextView
+            android:id="@+id/write_msg_display_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""/>
 
         <!-- Message text textview -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/write_msg_bodytext_label"/>
         <EditText
             android:id="@+id/write_msg_body_text"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="#FFFFFF"/>
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".80"
+            android:background="#FFFFFF"
+            android:padding="5dp"
+            android:layout_marginTop="3dp"
+            android:gravity="top"
+            android:textColor="#000000"/>
+
+        <!-- Submit button-->
+
+            <Button
+                android:id="@+id/write_msg_submit_btn"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick=""
+                android:text="@string/write_msg_submit_btn"/>
     </LinearLayout>
+
+
 
 </RelativeLayout>

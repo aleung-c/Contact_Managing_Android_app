@@ -72,9 +72,9 @@ public class display_contact extends Activity {
 
         // alert dialog
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Delete contact ?");
-        alertDialog.setMessage("Are you sure you want to delete this contact?");
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+        alertDialog.setTitle(getResources().getString(R.string.Delete_window_title));
+        alertDialog.setMessage(getResources().getString(R.string.Delete_window_msg));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getResources().getString(R.string.txt_yes),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -83,7 +83,7 @@ public class display_contact extends Activity {
                         back_to_list();
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getResources().getString(R.string.txt_no),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

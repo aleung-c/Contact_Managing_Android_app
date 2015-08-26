@@ -1,6 +1,8 @@
 package com.example.aleung_c.ft_hangouts;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,71 +11,57 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
-
-public class search_contacts extends Activity {
+public class write_msg extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_contacts);
-        set_autocomp_bar();
-        display_list("");
-
+        setContentView(R.layout.activity_write_msg);
     }
 
-    public void push_search_btn(View view) {
-        AutoCompleteTextView search_text = (AutoCompleteTextView) findViewById(R.id.search_contact_name);
-        String text_entered = search_text.getText().toString();
-        display_list(text_entered);
-    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_write_msg, menu);
 
-    private void set_autocomp_bar() {
         DatabaseHandler db = new DatabaseHandler(this);
+
+
         List<Contact>db_contacts = db.getAllContacts();
 
         // set the adapter with contact list.
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, db_contacts);
 
         // display the adapter.
-        AutoCompleteTextView autoctextview = (AutoCompleteTextView) findViewById(R.id.search_contact_name);
+        AutoCompleteTextView autoctextview = (AutoCompleteTextView) findViewById(R.id.write_msg_name_select);
         autoctextview.setAdapter(adapter);
 
         autoctextview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // do when click on item from the autocompletion.
-                display_list(parent.getItemAtPosition(position).toString());
+                String name = (String) parent.getItemAtPosition(position).toString();
+                Contact contact = (Contact) parent.getItemAtPosition(position);
+
+                String phone_nb = contact.getPhonenb();
+                TextView display_num = (TextView) findViewById(R.id.write_msg_display_num);
+                display_num.setText(phone_nb);
             }
+        });
 
-            });
+        click_send_msg();
+
         db.close();
-    }
 
-    private void display_list(String display_type)
-    {
-        DatabaseHandler db = new DatabaseHandler(this);
-
-        List<Contact> contacts;
-        if (display_type.equals(""))
-            contacts  = db.getAllContacts();
-        else
-            contacts = db.getAllContactsfromName(display_type);
-        ListView listContent = (ListView) findViewById(R.id.contact_listview);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, contacts);
-        listContent.setAdapter(adapter);
-        db.close();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_display_contacts, menu);
         return true;
+    }
+
+    private void click_send_msg() {
+        Button submit_btn = (Button) findViewById(R.id.write_msg_submit_btn);
+
     }
 
     @Override
@@ -90,4 +78,8 @@ public class search_contacts extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
+
+

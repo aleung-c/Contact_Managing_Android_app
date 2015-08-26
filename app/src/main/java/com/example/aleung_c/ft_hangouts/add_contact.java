@@ -102,7 +102,7 @@ public class add_contact extends Activity {
         if (name_field.getText().toString() == null || name_field.getText().toString().isEmpty()
                 || number_field.getText().toString() == null
                 || number_field.getText().toString().isEmpty()) {
-            error_text.setText("Fields are empty!");
+            error_text.setText(R.string.add_contact_fields_empty);
             return false;
         }
         error_text.setText("");

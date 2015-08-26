@@ -69,18 +69,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 //        System.exit(0);
 //    }
 
-    public void goto_contact_list(View v)
-    {
-        Intent intent = new Intent(this, search_contacts.class);
-        startActivity(intent);
-    }
 
-    public void goto_add_contact(View v)
-    {
-        Intent intent = new Intent(this, add_contact.class);
-        intent.putExtra("ADDCONTACT_ACTION", "ADD");
-        startActivity(intent);
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,4 +89,26 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public void onBackPressed() {
         System.exit(0);
     }
+
+    // GOTO BUTTONS
+    public void goto_contact_list(View v)
+    {
+        Intent intent = new Intent(this, search_contacts.class);
+        startActivity(intent);
+    }
+
+    public void goto_add_contact(View v)
+    {
+        Intent intent = new Intent(this, add_contact.class);
+        intent.putExtra("ADDCONTACT_ACTION", "ADD");
+        startActivity(intent);
+    }
+
+    public void goto_write_msg(View v)
+    {
+        Intent intent = new Intent(this, write_msg.class);
+        intent.putExtra("NEW_MSG_ACTION", "NO_SElECTION");
+        startActivity(intent);
+    }
 }
+
