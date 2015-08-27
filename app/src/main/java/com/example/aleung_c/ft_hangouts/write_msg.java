@@ -48,6 +48,14 @@ public class write_msg extends Activity {
 
 
         // ICI faire intent recup si user vient de display_contact.
+        Intent passed_id = getIntent();
+        if (passed_id.getExtras().getInt("WRITE_MSG_ID") != -1)
+        {
+            dest.setId(passed_id.getExtras().getInt("WRITE_MSG_ID"));
+            // ICI A FAIRE ADD Contact infos...
+
+            // .........
+        }
 
 
         // SI user click sur un choix de actv
