@@ -107,7 +107,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public void goto_write_msg(View v)
     {
         Intent intent = new Intent(this, write_msg.class);
-        intent.putExtra("NEW_MSG_ACTION", "NO_SElECTION");
+        intent.putExtra("WRITE_MSG_ID", -1);
         startActivity(intent);
     }
 }

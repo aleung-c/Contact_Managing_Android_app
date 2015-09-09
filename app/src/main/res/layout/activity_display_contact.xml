@@ -54,6 +54,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+            <!-- Send_msg button -->
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:onClick="goto_write_msg"
+                android:text="@string/display_contact_write_msg_btn" />
             <!-- Edit button -->
             <Button
                 android:layout_width="wrap_content"

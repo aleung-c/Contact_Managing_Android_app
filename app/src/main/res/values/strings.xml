@@ -41,6 +41,9 @@
     <string name="display_contact_page_title">Contact page</string>
     <string name="display_contact_name_label">Name:</string>
     <string name="display_contact_nb_label">Phone Number:</string>
+
+    <string name="display_contact_write_msg_btn">Send Message</string>
+
     <string name="display_contact_edit_btn">Edit Contact</string>
     <string name="display_contact_delete_btn">Delete Contact</string>
 
@@ -49,8 +52,10 @@
     <string name="txt_yes">Yes</string>
     <string name="txt_no">No</string>
 
+
+
     <!-- write new message activity -->
-    <string name="title_activity_write_msg">write_msg</string>
+    <string name="title_activity_write_msg">Write Message</string>
 
     <string name="write_msg_contact_label">Send to:</string>
     <string name="write_msg_bodytext_label">Message:</string>
@@ -59,4 +64,9 @@
 
     <string name="write_msg_submit_btn">Send</string>
 
+        <!-- user error messages -->
+    <string name="write_msg_error_log_OK">Contact found - OK</string>
+    <string name="write_msg_error_log_direct_nb">Send direct number</string>
+    <string name="write_msg_error_log_ambiguous">Ambiguous contact name</string>
+    <string name="write_msg_error_log_no_contact">no contact by this name</string>
 </resources>

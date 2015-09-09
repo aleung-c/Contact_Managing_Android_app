@@ -11,7 +11,7 @@ public class Contact {
     // constructors
 
     public Contact(){
-        this._contact_id = 0;
+        this._contact_id = -1;
         this._contact_name = null;
         this._contact_phonenb = null;
     }

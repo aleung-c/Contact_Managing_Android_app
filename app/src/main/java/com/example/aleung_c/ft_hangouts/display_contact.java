@@ -93,14 +93,24 @@ public class display_contact extends Activity {
         alertDialog.show();
     }
 
+    public void goto_write_msg(View v) {
+        Intent prev_intent = getIntent();
+        int id_to_pass = (int) prev_intent.getExtras().getInt("CONTACT_ID");
+        Intent intent = new Intent(this, write_msg.class);
+        intent.putExtra("WRITE_MSG_ID", (int) id_to_pass);
+        startActivity(intent);
+    }
+
     public void goto_edit_contact(View v) {
         Intent prev_intent = getIntent();
         int id_to_display = (int) prev_intent.getExtras().getInt("CONTACT_ID");
         Intent intent = new Intent(this, add_contact.class);
         intent.putExtra("ADDCONTACT_ACTION", "EDIT");
-        intent.putExtra("EDITCONTACT_ID",  (int)id_to_display);
+        intent.putExtra("EDITCONTACT_ID", (int) id_to_display);
         startActivity(intent);
     }
+
+
 
     public void back_to_list() {
         Intent intent = new Intent(this, MainActivity.class);

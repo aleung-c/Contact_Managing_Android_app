@@ -37,6 +37,7 @@
 
         <!-- Message text textview -->
         <TextView
+            android:id="@+id/write_msg_body_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/write_msg_bodytext_label"/>
@@ -60,7 +61,6 @@
                 android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:onClick=""
                 android:text="@string/write_msg_submit_btn"/>
     </LinearLayout>
 

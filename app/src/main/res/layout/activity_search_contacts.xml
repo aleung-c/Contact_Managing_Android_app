@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:minHeight="20dp"
             android:orientation="horizontal">
-            <AutoCompleteTextView
+            <EditText
                 android:id="@+id/search_contact_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

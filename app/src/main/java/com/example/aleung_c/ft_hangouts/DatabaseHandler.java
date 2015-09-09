@@ -113,13 +113,63 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return contactList;
     }
 
-    // get contacts from name
-    public List<Contact> getAllContactsfromName(String name_asked) {
+    // get contacts from name - contains name
+    public List<Contact> getAllContactsfromName_contains(String name_asked) {
         List<Contact> contactList = new ArrayList<>(); // list to return;
         SQLiteDatabase db = this.getWritableDatabase(); // open db to fetch all contacts;
         String selectQuery = "SELECT  * FROM " + TABLE +
                 " WHERE " + KEY_name +
                 " LIKE '%" + name_asked + "%'"; // SQL request;
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) { // cursor on first element;
+            do {
+                Contact contact = new Contact();
+                contact.setId(Integer.parseInt(cursor.getString(0)));
+                contact.setName(cursor.getString(1));
+                contact.setPhonenb(cursor.getString(2));
+
+                // Adding contact to list
+                contactList.add(contact);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return contactList;
+    }
+
+    // get contacts from name - name start with
+    public List<Contact> getAllContactsfromName_start(String name_asked) {
+        List<Contact> contactList = new ArrayList<>(); // list to return;
+        SQLiteDatabase db = this.getWritableDatabase(); // open db to fetch all contacts;
+        String selectQuery = "SELECT  * FROM " + TABLE +
+                " WHERE " + KEY_name +
+                " LIKE '" + name_asked + "%' ORDER BY " + KEY_name; // SQL request;
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) { // cursor on first element;
+            do {
+                Contact contact = new Contact();
+                contact.setId(Integer.parseInt(cursor.getString(0)));
+                contact.setName(cursor.getString(1));
+                contact.setPhonenb(cursor.getString(2));
+
+                // Adding contact to list
+                contactList.add(contact);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return contactList;
+    }
+
+    // get contacts from name strict
+    public List<Contact> getAllContactsfromNameStrict(String name_asked) {
+        List<Contact> contactList = new ArrayList<>(); // list to return;
+        SQLiteDatabase db = this.getWritableDatabase(); // open db to fetch all contacts;
+        String selectQuery = "SELECT  * FROM " + TABLE +
+                " WHERE " + KEY_name +
+                " LIKE '" + name_asked + "'"; // SQL request;
 
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
