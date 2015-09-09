@@ -20,9 +20,6 @@ public class display_contact extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_contact);
-
-
-
         DatabaseHandler db = new DatabaseHandler(this);
 
         Intent intent = getIntent();
@@ -35,6 +32,15 @@ public class display_contact extends Activity {
 
         TextView number = (TextView) findViewById(R.id.contact_nb);
         number.setText(contact_to_display.getPhonenb());
+
+        TextView organisation = (TextView) findViewById(R.id.contact_orga);
+        organisation.setText(contact_to_display.getOrganisation());
+
+        TextView role = (TextView) findViewById(R.id.contact_role);
+        role.setText(contact_to_display.getRole());
+
+        TextView mail = (TextView) findViewById(R.id.contact_mail);
+        mail.setText(contact_to_display.getRole());
     }
 
     @Override
@@ -98,6 +104,14 @@ public class display_contact extends Activity {
         int id_to_pass = (int) prev_intent.getExtras().getInt("CONTACT_ID");
         Intent intent = new Intent(this, write_msg.class);
         intent.putExtra("WRITE_MSG_ID", (int) id_to_pass);
+        startActivity(intent);
+    }
+
+    public void goto_readmsg(View v) {
+        Intent prev_intent = getIntent();
+        int id_to_display = (int) prev_intent.getExtras().getInt("CONTACT_ID");
+        Intent intent = new Intent(this, Readmsg.class);
+        intent.putExtra("CONTACT_ID", id_to_display);
         startActivity(intent);
     }
 

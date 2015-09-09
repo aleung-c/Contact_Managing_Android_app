@@ -46,6 +46,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.aleung_c.ft_hangouts.MainActivity" />
         </activity>
+        <activity
+            android:name=".Readmsg"
+            android:label="@string/title_activity_readmsg"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.aleung_c.ft_hangouts.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

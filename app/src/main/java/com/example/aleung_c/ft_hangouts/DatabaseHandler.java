@@ -23,7 +23,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String KEY_ID = "id";                   // string 0
     public static final String KEY_name = "name";               // string 1
     public static final String KEY_Phonenb = "phone_number";    // string 2
-
+    public static final String KEY_Organisation = "organisation";
+    public static final String KEY_Role = "role";
+    public static final String KEY_Mail = "mail";
     // constructor
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,8 +40,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // create string with sql request
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_name + " TEXT,"
-                + KEY_Phonenb + " TEXT" + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY,"
+                + KEY_name + " TEXT,"
+                + KEY_Phonenb + " TEXT,"
+                + KEY_Organisation + " TEXT,"
+                + KEY_Role + "TEXT,"
+                + KEY_Mail + "TEXT,"
+                + ")";
         // use string to create sql table
         db.execSQL(CREATE_CONTACTS_TABLE);
     }

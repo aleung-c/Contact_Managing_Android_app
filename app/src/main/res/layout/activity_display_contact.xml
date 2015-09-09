@@ -38,7 +38,6 @@
             android:id="@+id/contact_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
         <!-- Contact number -->
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +47,33 @@
             android:id="@+id/contact_nb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
+        <!-- Contact organisation -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/display_contact_orga_label"/>
+        <TextView
+                android:id="@+id/contact_orga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        <!-- Contact role -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/display_contact_role_label"/>
+        <TextView
+                android:id="@+id/contact_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        <!-- Contact mail -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/display_contact_mail_label"/>
+        <TextView
+                android:id="@+id/contact_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         <!-- Buttons -->
         <LinearLayout
             android:layout_width="wrap_content"
@@ -56,31 +81,49 @@
             android:orientation="horizontal">
             <!-- Send_msg button -->
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center"
                 android:onClick="goto_write_msg"
-                android:text="@string/display_contact_write_msg_btn" />
-            <!-- Edit button -->
+                android:text="@string/display_contact_write_msg_btn"
+                android:layout_weight="1"/>
+            <!-- Read messages button -->
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:onClick="goto_readmsg"
+                android:text="@string/display_contact_readmsg_btn"
+                android:layout_weight="1"/>
+            <!-- Edit button -->
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center"
                 android:onClick="goto_edit_contact"
-                android:text="@string/display_contact_edit_btn" />
+                android:text="@string/display_contact_edit_btn"
+                android:layout_weight="1"/>
             <!-- Delete button -->
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center"
                 android:onClick="Onclick_delete"
-                android:text="@string/display_contact_delete_btn" />
+                android:text="@string/display_contact_delete_btn"
+                android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

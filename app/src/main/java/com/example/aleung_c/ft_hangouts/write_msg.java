@@ -28,12 +28,6 @@ public class write_msg extends Activity implements View.OnKeyListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_msg);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_write_msg, menu);
 
         DatabaseHandler db = new DatabaseHandler(this); // db connection.
         // contact to send to at the end.
@@ -44,8 +38,7 @@ public class write_msg extends Activity implements View.OnKeyListener {
         // the search bar.
         AutoCompleteTextView autoctextview = (AutoCompleteTextView) findViewById(R.id.write_msg_name_select);
 
-
-        // ICI faire intent recup si user vient de display_contact.
+        // intent recup si user vient de display_contact.
         int passed_id = getIntent().getExtras().getInt("WRITE_MSG_ID");
         // si entree depuis display contact page
         if (passed_id != -1)
@@ -58,7 +51,6 @@ public class write_msg extends Activity implements View.OnKeyListener {
             TextView display_num = (TextView) findViewById(R.id.write_msg_display_num);
             display_num.setText(dest.getPhonenb());
         }
-
         // SET AUTO COMPLETE TEXT VIEW
         // Call contacts for autocompletion.
         List<Contact>db_contacts = db.getAllContacts();
@@ -66,7 +58,6 @@ public class write_msg extends Activity implements View.OnKeyListener {
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, db_contacts);
         // display the adapter.
         autoctextview.setAdapter(adapter);
-
         // SI user click sur un choix de actv
         autoctextview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,10 +72,15 @@ public class write_msg extends Activity implements View.OnKeyListener {
                 display_num.setText(phone_nb);
             }
         });
-
         click_send_msg(dest);
-
         db.close();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.menu_write_msg, menu);
+
 
         return true;
     }
@@ -99,18 +95,14 @@ public class write_msg extends Activity implements View.OnKeyListener {
             @Override
             public void onClick(View v) {
 
-                if (dest.getId() != -1)
-                {
+                if (dest.getId() != -1) {
                     Contact check_contact = db.getContact(dest.getId());
                     if (check_contact.getName().equals(actview.getText().toString()) &&
-                            dest.getPhonenb().equals(check_contact.getPhonenb()))
-                    {
+                            dest.getPhonenb().equals(check_contact.getPhonenb())) {
                         label_body.setTextColor(Color.parseColor("#33CCFF")); //
                         label_body.setText(R.string.write_msg_error_log_OK);
-                            // CONTACT OK TO SEND
-                    }
-                    else
-                    {
+                        // CONTACT OK TO SEND
+                    } else {
                         // il y a eu un changement. Clear all.
                         // TextView label_body = (TextView) findViewById(R.id.write_msg_body_label); //
                         dest.setId(-1);
@@ -119,8 +111,7 @@ public class write_msg extends Activity implements View.OnKeyListener {
                         // go check lentry puisquil y a eu un change
                         check_entry(dest, label_body, actview);
                     }
-                }
-                else // go check lentry, puisque c clear.
+                } else // go check lentry, puisque c clear.
                 {
                     TextView nb_display = (TextView) findViewById(R.id.write_msg_display_num);
                     nb_display.setText("");
