@@ -40,7 +40,7 @@ public class display_contact extends Activity {
         role.setText(contact_to_display.getRole());
 
         TextView mail = (TextView) findViewById(R.id.contact_mail);
-        mail.setText(contact_to_display.getRole());
+        mail.setText(contact_to_display.getMail());
     }
 
     @Override

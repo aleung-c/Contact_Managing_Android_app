@@ -81,7 +81,6 @@ public class write_msg extends Activity implements View.OnKeyListener {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.menu_write_msg, menu);
 
-
         return true;
     }
 
@@ -102,21 +101,21 @@ public class write_msg extends Activity implements View.OnKeyListener {
                         label_body.setTextColor(Color.parseColor("#33CCFF")); //
                         label_body.setText(R.string.write_msg_error_log_OK);
                         // CONTACT OK TO SEND
-                    } else {
+                    }
+                    else {
                         // il y a eu un changement. Clear all.
                         // TextView label_body = (TextView) findViewById(R.id.write_msg_body_label); //
                         dest.setId(-1);
                         TextView nb_display = (TextView) findViewById(R.id.write_msg_display_num);
                         nb_display.setText("");
-                        // go check lentry puisquil y a eu un change
+                        // go check lentry puisquil y a eu un changement
                         check_entry(dest, label_body, actview);
                     }
-                } else // go check lentry, puisque c clear.
-                {
+                }
+                else { // go check lentry, clear.
                     TextView nb_display = (TextView) findViewById(R.id.write_msg_display_num);
                     nb_display.setText("");
                     check_entry(dest, label_body, actview);
-
                 }
             }
         });

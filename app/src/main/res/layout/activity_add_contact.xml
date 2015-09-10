@@ -38,7 +38,6 @@
             android:id="@+id/name_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:inputType="textPersonName"
             android:maxLines="1"/>
 
@@ -51,10 +50,44 @@
             android:id="@+id/number_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:inputType="phone"
             android:maxLines="1"/>
 
+        <!-- Organisation fields -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_contact_orga_label"/>
+        <EditText
+            android:id="@+id/orga_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:maxLines="1"/>
+
+        <!-- Role fields -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_contact_role_label"/>
+        <EditText
+            android:id="@+id/role_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:maxLines="1"/>
+
+        <!-- Mail fields -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_contact_mail_label"/>
+        <EditText
+            android:id="@+id/mail_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"/>
         <!-- Submit btn -->
         <Button
             android:id="@+id/add_contact_submit_btn"

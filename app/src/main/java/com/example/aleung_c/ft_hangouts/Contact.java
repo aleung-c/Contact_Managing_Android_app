@@ -3,6 +3,7 @@ package com.example.aleung_c.ft_hangouts;
 /**
  * Created by aleung-c on 10/08/15.
  */
+
 public class Contact {
     int _contact_id;
     String _contact_name;
@@ -12,7 +13,6 @@ public class Contact {
     String _contact_mail = "";
 
     // constructors
-
     public Contact(){
         this._contact_id = -1;
         this._contact_name = null;
@@ -24,10 +24,13 @@ public class Contact {
         this._contact_phonenb = _phone_number;
     }
 
-    public Contact(int id, String name, String _phone_number){
+    public Contact(int id, String name, String phone_number, String orga, String role, String mail){
         this._contact_id = id;
         this._contact_name = name;
-        this._contact_phonenb = _phone_number;
+        this._contact_phonenb = phone_number;
+        this._contact_organisation = orga;
+        this._contact_role = role;
+        this._contact_mail = mail;
     }
 
     // accessors

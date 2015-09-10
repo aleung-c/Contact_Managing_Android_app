@@ -26,8 +26,11 @@
     <string name="title_activity_edit_contact">Edit Contact</string>
         <string name="edit_contact_page_intro">Edit contact information</string>
         <string name="add_contact_page_intro">Add a new contact</string>
-        <string name="add_contact_name_label">Name:</string>
-        <string name="add_contact_nb_label">Phone Number:</string>
+        <string name="add_contact_name_label">Name:*</string>
+        <string name="add_contact_nb_label">Phone Number:*</string>
+        <string name="add_contact_orga_label">Organisation:</string>
+        <string name="add_contact_role_label">Role:</string>
+        <string name="add_contact_mail_label">mail:</string>
         <string name="confirm_add_btn">Add Contact</string>
         <string name="confirm_edit_btn">Edit Contact</string>
             <!-- Error logs Display one contact -->

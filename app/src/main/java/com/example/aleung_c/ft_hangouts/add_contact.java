@@ -37,6 +37,15 @@ public class add_contact extends Activity {
             EditText number = (EditText) findViewById(R.id.number_field);
             number.setText(contact_to_display.getPhonenb());
 
+            EditText orga = (EditText) findViewById(R.id.orga_field);
+            orga.setText(contact_to_display.getOrganisation());
+
+            EditText role = (EditText) findViewById(R.id.role_field);
+            role.setText(contact_to_display.getRole());
+
+            EditText mail = (EditText) findViewById(R.id.mail_field);
+            mail.setText(contact_to_display.getMail());
+
             Button submit_btn = (Button) findViewById(R.id.add_contact_submit_btn);
             submit_btn.setText(R.string.confirm_edit_btn);
         }
@@ -74,12 +83,18 @@ public class add_contact extends Activity {
 
        EditText name_field = (EditText) findViewById(R.id.name_field);
        EditText number_field = (EditText) findViewById(R.id.number_field);
+       EditText orga_field = (EditText) findViewById(R.id.orga_field);
+       EditText role_field = (EditText) findViewById(R.id.role_field);
+       EditText mail_field = (EditText) findViewById(R.id.mail_field);
 
        if (are_fields_OK(name_field, number_field))
        {
            // set contact values
            contact_added.setName(name_field.getText().toString());
            contact_added.setPhonenb(number_field.getText().toString());
+           contact_added.setOrganisation(orga_field.getText().toString());
+           contact_added.setRole(role_field.getText().toString());
+           contact_added.setMail(mail_field.getText().toString());
 
            if (getIntent().getExtras().getString("ADDCONTACT_ACTION").equals("ADD")) {
                db.addContact(contact_added);
