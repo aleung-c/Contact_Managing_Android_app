@@ -1,10 +1,12 @@
 package com.example.aleung_c.ft_hangouts;
 
+import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.telephony.TelephonyManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -281,8 +283,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_msg_body, message.getMsgBody());
 
         // Inserting Row from values.
-        db.insert(TABLE, null, values);
+        db.insert(TABLE_MSG, null, values);
         db.close(); // Closing database connection
+    }
+
+    // get contacts from name strict
+    public List<Message> getAllMessagesfromId(int id, String myphonenb) {
+
+        List<Message> msgList = new ArrayList<>(); // list to return;
+        SQLiteDatabase db = this.getWritableDatabase(); // open db to fetch all contacts;
+        String selectQuery = "SELECT  * FROM " + TABLE_MSG +
+                " WHERE " + KEY_sender_nb + " OR " + KEY_dest_nb +
+                " LIKE '" + getContact(id).getPhonenb() + "' OR '" + myphonenb +
+                "' ORDER BY " + KEY_date_created +
+                ";"; // SQL request;
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) { // cursor on first element;
+            do {
+                Message msg = new Message();
+                msg.setId(Integer.parseInt(cursor.getString(0)));
+                msg.setSendName(cursor.getString(2));
+                msg.setSendNb(cursor.getString(3));
+                msg.setDestName(cursor.getString(4));
+                msg.setDestNb(cursor.getString(5));
+
+                // Adding contact to list
+                msgList.add(msg);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return msgList;
     }
 
 }

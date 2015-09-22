@@ -52,8 +52,11 @@ public class Message {
     public String getDestNb() {return (this._dest_nb);}
     public String getMsgBody() {return (this._msg_body);}
 
+    public String toString() {return (this._msg_body);}
+
     // Setters;
     public void setId(Integer id) {this._message_id = id;}
+    public void setDate(String date) {this._date = date;}
     public void setSendName(String sendname) {this._sender_name = sendname;}
     public void setSendNb(String sendnb) {this._sender_nb = sendnb;}
     public void setDestName(String destname) {this._dest_name = destname;}

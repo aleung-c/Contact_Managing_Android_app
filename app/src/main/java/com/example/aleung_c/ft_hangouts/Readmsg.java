@@ -1,12 +1,18 @@
 package com.example.aleung_c.ft_hangouts;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
 
 
 public class Readmsg extends Activity {
@@ -27,6 +33,16 @@ public class Readmsg extends Activity {
 
         TextView number = (TextView) findViewById(R.id.readmsg_contact_nb);
         number.setText(contact_to_display.getPhonenb());
+
+        // display messages.
+        TelephonyManager  tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        String myphonenb = tm.getLine1Number();
+
+        List<Message> messages =  db.getAllMessagesfromId(id_to_display, myphonenb);
+        ListView listmsgContent = (ListView) findViewById(R.id.msg_list);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, messages);
+        listmsgContent.setAdapter(adapter);
+        db.close();
     }
 
     @Override
