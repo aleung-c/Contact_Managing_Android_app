@@ -89,7 +89,7 @@ public class write_msg extends Activity implements View.OnKeyListener {
     private void click_send_msg(final Contact dest) {
         // lorsque click sur le btn send.
 
-        final Message msg_to_send = new Message();
+        final Message msg_to_send = new Message(); // msg to send a la fin
 
         final DatabaseHandler db = new DatabaseHandler(this);
         Button submit_btn = (Button) findViewById(R.id.write_msg_submit_btn);
@@ -105,13 +105,14 @@ public class write_msg extends Activity implements View.OnKeyListener {
                             dest.getPhonenb().equals(check_contact.getPhonenb())) {
                         label_body.setTextColor(Color.parseColor("#33CCFF")); //
                         label_body.setText(R.string.write_msg_error_log_OK);
+
                         // CONTACT OK TO SEND FILL MESSAGE OBJECT
                         msg_to_send.setDestName(dest.getName());
                         msg_to_send.setDestNb(dest.getPhonenb());
                         EditText msg_body = (EditText) findViewById(R.id.write_msg_body_text);
                         msg_to_send.setMsgBody(msg_body.getText().toString());
 
-                        TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
                         String myphonenb = tm.getLine1Number();
                         msg_to_send.setSendName("Me");
                         msg_to_send.setSendNb(myphonenb);

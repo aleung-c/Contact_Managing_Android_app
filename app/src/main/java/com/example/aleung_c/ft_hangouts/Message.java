@@ -52,7 +52,7 @@ public class Message {
     public String getDestNb() {return (this._dest_nb);}
     public String getMsgBody() {return (this._msg_body);}
 
-    public String toString() {return (this._msg_body);}
+//    public String toString() {return (this._msg_body);}
 
     // Setters;
     public void setId(Integer id) {this._message_id = id;}

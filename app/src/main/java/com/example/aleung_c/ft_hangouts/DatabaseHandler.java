@@ -274,7 +274,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues(); // prepare list of values to add;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
-        //get values from contact object;
+        // get values from message object;
         values.put(KEY_date_created, dateFormat.format(now));
         values.put(KEY_sender_name, message.getSenderName());
         values.put(KEY_sender_nb, message.getSenderNb());
@@ -308,6 +308,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 msg.setSendNb(cursor.getString(3));
                 msg.setDestName(cursor.getString(4));
                 msg.setDestNb(cursor.getString(5));
+                msg.setMsgBody(cursor.getString(6));
 
                 // Adding contact to list
                 msgList.add(msg);

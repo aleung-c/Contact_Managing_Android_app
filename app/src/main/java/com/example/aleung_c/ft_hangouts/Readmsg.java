@@ -1,15 +1,20 @@
 package com.example.aleung_c.ft_hangouts;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.List;
@@ -39,9 +44,27 @@ public class Readmsg extends Activity {
         String myphonenb = tm.getLine1Number();
 
         List<Message> messages =  db.getAllMessagesfromId(id_to_display, myphonenb);
-        ListView listmsgContent = (ListView) findViewById(R.id.msg_list);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, messages);
-        listmsgContent.setAdapter(adapter);
+//        ListView listmsgContent = (ListView) findViewById(R.id.msg_list);
+//        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, messages);
+//        listmsgContent.setAdapter(adapter);
+
+        LinearLayout current_layout = (LinearLayout)findViewById(R.id.read_msg_main);
+//        setContentView(linearLayout);
+        current_layout.setOrientation(LinearLayout.VERTICAL);
+        for( int i = 0; i < messages.size(); i++ )
+        {
+            TextView textView = new TextView(this);
+//            textView.setLayoutParams();
+
+            textView.setWidth(current_layout.getWidth());
+            if (messages.get(i).getSenderNb() == myphonenb)
+                textView.setGravity(Gravity.RIGHT);
+            else
+                textView.setGravity(Gravity.LEFT);
+
+            textView.setText(messages.get(i).getMsgBody());
+            current_layout.addView(textView);
+        }
         db.close();
     }
 
