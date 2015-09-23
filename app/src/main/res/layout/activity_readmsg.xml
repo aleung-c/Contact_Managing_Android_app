@@ -28,7 +28,8 @@
         <TextView
             android:id="@+id/readmsg_contact_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"/>
 
         <!-- Contact number -->
         <TextView
@@ -39,12 +40,17 @@
             android:id="@+id/readmsg_contact_nb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"/>
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="8dp"/>
 
-        <!--<ListView-->
-            <!--android:id="@+id/msg_list"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content">-->
-        <!--</ListView>-->
+        <LinearLayout
+            android:id="@+id/readmsg_msgbody"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="6dp"
+            android:background="#003333">
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

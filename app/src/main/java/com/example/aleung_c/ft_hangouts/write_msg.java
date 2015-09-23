@@ -89,7 +89,7 @@ public class write_msg extends Activity implements View.OnKeyListener {
     private void click_send_msg(final Contact dest) {
         // lorsque click sur le btn send.
 
-        final Message msg_to_send = new Message(); // msg to send a la fin
+
 
         final DatabaseHandler db = new DatabaseHandler(this);
         Button submit_btn = (Button) findViewById(R.id.write_msg_submit_btn);
@@ -104,20 +104,11 @@ public class write_msg extends Activity implements View.OnKeyListener {
                     if (check_contact.getName().equals(actview.getText().toString()) &&
                             dest.getPhonenb().equals(check_contact.getPhonenb())) {
                         label_body.setTextColor(Color.parseColor("#33CCFF")); //
-                        label_body.setText(R.string.write_msg_error_log_OK);
+                        label_body.setText(R.string.write_msg_error_log_OK); // contact found OK
 
                         // CONTACT OK TO SEND FILL MESSAGE OBJECT
-                        msg_to_send.setDestName(dest.getName());
-                        msg_to_send.setDestNb(dest.getPhonenb());
-                        EditText msg_body = (EditText) findViewById(R.id.write_msg_body_text);
-                        msg_to_send.setMsgBody(msg_body.getText().toString());
-
-                        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-                        String myphonenb = tm.getLine1Number();
-                        msg_to_send.setSendName("Me");
-                        msg_to_send.setSendNb(myphonenb);
-                        db.addMessage(msg_to_send);
-                        // FAIRE SEND CMD SMS.
+                        fill_msg_and_send(dest);
+                        goto_readmsg(dest.getId());
                     }
                     else {
                         // il y a eu un changement. Clear all.
@@ -141,23 +132,34 @@ public class write_msg extends Activity implements View.OnKeyListener {
     private void check_entry(Contact dest, final TextView label_body, AutoCompleteTextView actview) {
        // sert a check le format de la nouvelle entree dans la bar de contact.
         final DatabaseHandler db = new DatabaseHandler(this);
-        if (PhoneNumberUtils.isGlobalPhoneNumber(actview.getText().toString())) {
+        if (PhoneNumberUtils.isGlobalPhoneNumber(actview.getText().toString())) { // DIRECT NB ROUTE
             dest.setName(actview.getText().toString());
             dest.setPhonenb(actview.getText().toString());
             label_body.setTextColor(Color.parseColor("#33CCFF")); //
             label_body.setText(R.string.write_msg_error_log_direct_nb); //
+
+            // BUG LORSQUE num existe deja sous un autre nb. FAIRE CHECK NB EXISTANT.
+
+            //
+            Contact unknown_contact = new Contact();
+            unknown_contact.setName(actview.getText().toString());
+            unknown_contact.setPhonenb(actview.getText().toString());
+            db.addContact(unknown_contact);
+            int id_ucontact = db.getContactFromNb(unknown_contact.getPhonenb()).getId();
+            fill_msg_and_send(dest);
+            goto_readmsg(id_ucontact);
         }
         else
         {
             List<Contact> getcontact = db.getAllContactsfromNameStrict(actview.getText().toString());
-            if (getcontact.size() > 1)
+            if (getcontact.size() > 1) // ERROR route ambiguous name
             {
                 label_body.setTextColor(Color.parseColor("#FF6699")); //
                 label_body.setText(R.string.write_msg_error_log_ambiguous); //
                 dest.setId(-1);
                 return;
             }
-            else if (getcontact.size() != 1)
+            else if (getcontact.size() != 1) // ERROR route no contact by that name
             {
                 label_body.setTextColor(Color.parseColor("#FF6699")); //
                 label_body.setText(R.string.write_msg_error_log_no_contact); //
@@ -173,9 +175,28 @@ public class write_msg extends Activity implements View.OnKeyListener {
                 dest.setId(getcontact.get(0).getId());
                 dest.setName(getcontact.get(0).getName());
                 dest.setPhonenb(getcontact.get(0).getPhonenb());
+                fill_msg_and_send(dest);
+                goto_readmsg(dest.getId());
                 return;
             }
         }
+    }
+
+    private void fill_msg_and_send(Contact dest) {
+        final Message msg_to_send = new Message(); // msg to send a la fin
+        final DatabaseHandler db = new DatabaseHandler(this);
+        msg_to_send.setDestName(dest.getName());
+        msg_to_send.setDestNb(dest.getPhonenb());
+        EditText msg_body = (EditText) findViewById(R.id.write_msg_body_text);
+        msg_to_send.setMsgBody(msg_body.getText().toString());
+
+        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        String myphonenb = tm.getLine1Number();
+        msg_to_send.setSendName("Me");
+        msg_to_send.setSendNb(myphonenb);
+        db.addMessage(msg_to_send);
+        db.close();
+        // FAIRE SEND CMD SMS.
     }
 
     @Override
@@ -205,6 +226,11 @@ public class write_msg extends Activity implements View.OnKeyListener {
         return super.onOptionsItemSelected(item);
     }
 
+    private void goto_readmsg(int id) {
+        Intent intent = new Intent(this, Readmsg.class);
+        intent.putExtra("CONTACT_ID", id);
+        startActivity(intent);
+    }
 
 }
 

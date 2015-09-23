@@ -132,6 +132,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return contact_to_add;
     }
 
+    public Contact getContactFromNb(String phonenb) {
+        SQLiteDatabase db = this.getReadableDatabase(); // open db
+        Cursor cursor;
+
+        // use cursor to get contact from db with id
+        cursor = db.query(TABLE, new String[] { KEY_ID,
+                        KEY_name, KEY_Phonenb, KEY_Organisation, KEY_Role, KEY_Mail }, KEY_Phonenb + "=?",
+                new String[] { phonenb }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+        //fill contact object to return with values fetched in db
+        assert cursor != null; // cursor cannot be null;
+        Contact contact_to_add;
+        contact_to_add = new Contact(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getString(5));
+        cursor.close();
+        return contact_to_add;
+    }
+
     // Getting All Contacts
     public List<Contact> getAllContacts() {
         List<Contact> contactList = new ArrayList<>(); // list to return;
@@ -208,6 +231,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return contactList;
     }
 
+    public List<Contact> getAllContactsfromPhonenb(String nb_asked) {
+        List<Contact> contactList = new ArrayList<>(); // list to return;
+        SQLiteDatabase db = this.getWritableDatabase(); // open db to fetch all contacts;
+        String selectQuery = "SELECT  * FROM " + TABLE +
+                " WHERE " + KEY_Phonenb +
+                " LIKE '" + nb_asked + "%' ORDER BY " + KEY_name; // SQL request;
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) { // cursor on first element;
+            do {
+                Contact contact = new Contact();
+                contact.setId(Integer.parseInt(cursor.getString(0)));
+                contact.setName(cursor.getString(1));
+                contact.setPhonenb(cursor.getString(2));
+
+                // Adding contact to list
+                contactList.add(contact);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return contactList;
+    }
+
     // get contacts from name strict
     public List<Contact> getAllContactsfromNameStrict(String name_asked) {
         List<Contact> contactList = new ArrayList<>(); // list to return;
@@ -237,6 +284,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public int getContactsCount() {
         SQLiteDatabase db = this.getReadableDatabase(); // open db to fetch all contacts;
         String countQuery = "SELECT  * FROM " + TABLE; // SQL request;
+        Cursor cursor = db.rawQuery(countQuery, null);
+        cursor.close();
+
+        return cursor.getCount();
+    }
+
+    // Getting contacts Count From phone number
+    public int getContactsCountFromNb(String nb_asked) {
+        SQLiteDatabase db = this.getReadableDatabase(); // open db to fetch all contacts;
+        String countQuery = "SELECT  * FROM " + TABLE +
+                " WHERE " + KEY_Phonenb +
+                " LIKE '" + nb_asked + "%' ORDER BY " + KEY_name; // SQL request;
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
 
@@ -293,9 +352,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<Message> msgList = new ArrayList<>(); // list to return;
         SQLiteDatabase db = this.getWritableDatabase(); // open db to fetch all contacts;
         String selectQuery = "SELECT  * FROM " + TABLE_MSG +
-                " WHERE " + KEY_sender_nb + " OR " + KEY_dest_nb +
-                " LIKE '" + getContact(id).getPhonenb() + "' OR '" + myphonenb +
-                "' ORDER BY " + KEY_date_created +
+                " WHERE (" + KEY_sender_nb +
+                " LIKE '" + getContact(id).getPhonenb() +
+                "' AND " + KEY_dest_nb + " LIKE '" + myphonenb +
+
+                "') OR " +
+                " (" + KEY_sender_nb +
+                " LIKE '" + myphonenb +
+                "' AND " + KEY_dest_nb + " LIKE '" + getContact(id).getPhonenb() +
+
+
+                "') ORDER BY " + KEY_date_created +
                 ";"; // SQL request;
 
         Cursor cursor = db.rawQuery(selectQuery, null);

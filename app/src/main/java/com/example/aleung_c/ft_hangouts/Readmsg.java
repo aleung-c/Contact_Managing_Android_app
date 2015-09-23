@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,26 +45,27 @@ public class Readmsg extends Activity {
         String myphonenb = tm.getLine1Number();
 
         List<Message> messages =  db.getAllMessagesfromId(id_to_display, myphonenb);
-//        ListView listmsgContent = (ListView) findViewById(R.id.msg_list);
-//        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, messages);
-//        listmsgContent.setAdapter(adapter);
-
-        LinearLayout current_layout = (LinearLayout)findViewById(R.id.read_msg_main);
-//        setContentView(linearLayout);
-        current_layout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout msg_layout = (LinearLayout)findViewById(R.id.readmsg_msgbody);
         for( int i = 0; i < messages.size(); i++ )
         {
-            TextView textView = new TextView(this);
+            TextView textView_date = new TextView(this); // affiche la date
+            TextView textView_msgbody = new TextView(this); // affiche le body
 //            textView.setLayoutParams();
 
-            textView.setWidth(current_layout.getWidth());
-            if (messages.get(i).getSenderNb() == myphonenb)
-                textView.setGravity(Gravity.RIGHT);
-            else
-                textView.setGravity(Gravity.LEFT);
-
-            textView.setText(messages.get(i).getMsgBody());
-            current_layout.addView(textView);
+            textView_msgbody.setWidth(msg_layout.getWidth());
+            if (messages.get(i).getSenderNb().equals(myphonenb)) {
+                textView_msgbody.setGravity(Gravity.RIGHT);
+                textView_date.setGravity(Gravity.RIGHT);
+            }
+            else {
+                textView_msgbody.setGravity(Gravity.LEFT);
+                textView_date.setGravity(Gravity.LEFT);
+            }
+            textView_date.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 11.0f);
+            textView_date.setText(messages.get(i).getDate());
+            textView_msgbody.setText(messages.get(i).getMsgBody());
+            msg_layout.addView(textView_date);
+            msg_layout.addView(textView_msgbody);
         }
         db.close();
     }
