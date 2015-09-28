@@ -113,5 +113,17 @@ public class search_contacts extends Activity implements View.OnKeyListener {
         return super.onOptionsItemSelected(item);
     }
 
+    // Set app visible or not.
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App_visibility.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App_visibility.activityPaused();
+    }
 
 }

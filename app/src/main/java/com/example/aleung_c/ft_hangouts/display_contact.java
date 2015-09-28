@@ -130,4 +130,17 @@ public class display_contact extends Activity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    // Set app visible or not.
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App_visibility.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App_visibility.activityPaused();
+    }
 }

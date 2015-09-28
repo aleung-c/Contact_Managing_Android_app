@@ -11,6 +11,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -67,6 +68,8 @@ public class Readmsg extends Activity {
             msg_layout.addView(textView_date);
             msg_layout.addView(textView_msgbody);
         }
+        // TODO : pb lors de laffichage lorsquil y a trop de msg ...
+        msg_layout.getBottom();
         db.close();
     }
 
@@ -91,4 +94,27 @@ public class Readmsg extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void goto_write_msg(View v) {
+        Intent prev_intent = getIntent();
+        int id_to_pass = (int) prev_intent.getExtras().getInt("CONTACT_ID");
+        Intent intent = new Intent(this, write_msg.class);
+        intent.putExtra("WRITE_MSG_ID", (int) id_to_pass);
+        startActivity(intent);
+    }
+
+    // Set app visible or not.
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App_visibility.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App_visibility.activityPaused();
+    }
+
+
 }

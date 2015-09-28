@@ -138,9 +138,19 @@ public class write_msg extends Activity implements View.OnKeyListener {
             label_body.setTextColor(Color.parseColor("#33CCFF")); //
             label_body.setText(R.string.write_msg_error_log_direct_nb); //
 
-            // BUG LORSQUE num existe deja sous un autre nb. FAIRE CHECK NB EXISTANT.
-
-            //
+            List <Contact>search_nb = db.getAllContactsfromPhonenb(actview.getText().toString());
+            // BUG LORSQUE num existe deja sous un autre nb ==> CHECK NB EXISTANT.
+            if (search_nb.size() != 0) {
+                // Nb existe.
+                label_body.setText(R.string.write_msg_error_log_OKnb);
+                dest.setId(search_nb.get(0).getId());
+                dest.setName(search_nb.get(0).getName());
+                dest.setPhonenb(search_nb.get(0).getPhonenb());
+                fill_msg_and_send(dest);
+                goto_readmsg(search_nb.get(0).getId());
+                return;
+            }
+            // Nb n'existe pas. creating new contact.
             Contact unknown_contact = new Contact();
             unknown_contact.setName(actview.getText().toString());
             unknown_contact.setPhonenb(actview.getText().toString());
@@ -195,8 +205,15 @@ public class write_msg extends Activity implements View.OnKeyListener {
         msg_to_send.setSendName("Me");
         msg_to_send.setSendNb(myphonenb);
         db.addMessage(msg_to_send);
+
+        // TODO : SEND CMD SMS. < ====== PAS BON...
+        Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+        i.putExtra("address", msg_to_send.getDestNb());
+        i.putExtra("sms_body", msg_to_send.getMsgBody());
+        i.setType("vnd.android-dir/mms-sms");
+        startActivity(i);
+
         db.close();
-        // FAIRE SEND CMD SMS.
     }
 
     @Override
@@ -232,6 +249,18 @@ public class write_msg extends Activity implements View.OnKeyListener {
         startActivity(intent);
     }
 
+    // Set app visible or not.
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App_visibility.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App_visibility.activityPaused();
+    }
 }
 
 

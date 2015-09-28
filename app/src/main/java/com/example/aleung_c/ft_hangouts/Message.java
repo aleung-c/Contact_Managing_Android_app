@@ -29,16 +29,15 @@ public class Message {
     }
 
 
-    public Message(int id, String sendername, String sendernb, String destname, String destnb, String msgbody){
-        this._message_id = id;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date now = new Date();
-        this._date = dateFormat.format(now);
-        this._sender_name = sendername;
-        this._sender_nb = sendernb;
-        this._dest_name = destname;
-        this._dest_nb = destnb;
-        this._msg_body = msgbody;
+    public Message(int fetch){
+        if (fetch != 0) {
+            this._message_id = -1;
+            this._sender_name = null;
+            this._sender_nb = null;
+            this._dest_name = null;
+            this._dest_nb = null;
+            this._msg_body = null;
+        }
     }
 
     // accessors

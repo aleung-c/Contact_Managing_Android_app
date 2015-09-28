@@ -43,14 +43,28 @@
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="8dp"/>
 
+        <!-- Where the text view msg go -->
         <LinearLayout
             android:id="@+id/readmsg_msgbody"
             android:orientation="vertical"
+            android:scrollbars = "vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_marginTop="6dp"
             android:background="#003333">
         </LinearLayout>
+
+        <!-- Send_msg button -->
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:onClick="goto_write_msg"
+            android:text="@string/display_contact_write_msg_btn"
+            android:layout_weight="1"/>
+
     </LinearLayout>
 </RelativeLayout>

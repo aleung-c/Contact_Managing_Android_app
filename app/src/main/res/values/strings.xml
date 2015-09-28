@@ -35,6 +35,7 @@
         <string name="confirm_edit_btn">Edit Contact</string>
             <!-- Error logs Display one contact -->
             <string name="add_contact_fields_empty">Fields are empty!</string>
+            <string name="add_contact_nb_exist">Number already used!</string>
 
     <!-- Display one contact -->
     <string name="title_activity_display_contact">Display Contact</string>
@@ -64,6 +65,7 @@
         <string name="write_msg_submit_btn">Send</string>
             <!-- user error messages -->
             <string name="write_msg_error_log_OK">Contact found - OK</string>
+            <string name="write_msg_error_log_OKnb">Contact found from number - OK</string>
             <string name="write_msg_error_log_direct_nb">Send direct number</string>
             <string name="write_msg_error_log_ambiguous">Ambiguous contact name</string>
             <string name="write_msg_error_log_no_contact">no contact by this name</string>

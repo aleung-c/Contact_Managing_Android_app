@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.List;
+
 
 public class add_contact extends Activity {
 
@@ -98,7 +100,8 @@ public class add_contact extends Activity {
 
            if (getIntent().getExtras().getString("ADDCONTACT_ACTION").equals("ADD")) {
                db.addContact(contact_added);
-           } else if (getIntent().getExtras().getString("ADDCONTACT_ACTION").equals("EDIT"))
+           }
+           else if (getIntent().getExtras().getString("ADDCONTACT_ACTION").equals("EDIT"))
            {
                // set contact id for updating
                contact_added.setId(db.getContact(getIntent().getExtras().getInt("EDITCONTACT_ID")).getId());
@@ -112,16 +115,38 @@ public class add_contact extends Activity {
     }
 
     public boolean are_fields_OK(EditText name_field, EditText number_field) {
+        // Check differents erreurs
+        DatabaseHandler db = new DatabaseHandler(this);
         TextView error_text = (TextView) findViewById(R.id.add_contact_error_text);
 
+        // check fields empty ou null;
         if (name_field.getText().toString() == null || name_field.getText().toString().isEmpty()
                 || number_field.getText().toString() == null
                 || number_field.getText().toString().isEmpty()) {
             error_text.setText(R.string.add_contact_fields_empty);
             return false;
         }
+        // check nb already exist;
+        List<Contact> search_nb = db.getAllContactsfromPhonenb(number_field.getText().toString());
+        if (search_nb.size() != 0) {
+            error_text.setText(R.string.add_contact_nb_exist);
+            return false;
+        }
         error_text.setText("");
         return true;
+    }
+
+    // Set app visible or not.
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App_visibility.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App_visibility.activityPaused();
     }
 }
 

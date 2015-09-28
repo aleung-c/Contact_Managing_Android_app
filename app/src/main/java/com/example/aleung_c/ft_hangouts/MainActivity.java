@@ -110,5 +110,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         intent.putExtra("WRITE_MSG_ID", -1);
         startActivity(intent);
     }
+
+    // Set app visible or not.
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App_visibility.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        App_visibility.activityPaused();
+    }
 }
+
 

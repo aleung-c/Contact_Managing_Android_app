@@ -369,8 +369,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) { // cursor on first element;
             do {
-                Message msg = new Message();
+                Message msg = new Message(1);
                 msg.setId(Integer.parseInt(cursor.getString(0)));
+                msg.setDate(cursor.getString(1));
                 msg.setSendName(cursor.getString(2));
                 msg.setSendNb(cursor.getString(3));
                 msg.setDestName(cursor.getString(4));
