@@ -65,10 +65,19 @@
             android:name=".SMS_reception"
             android:enabled="true"
             android:exported="true" >
-            <intent-filter android:priority="999">
+            <intent-filter android:priority="999" >
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".UserSettingActivity"
+            android:label="@string/title_activity_user_setting"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.aleung_c.ft_hangouts.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
