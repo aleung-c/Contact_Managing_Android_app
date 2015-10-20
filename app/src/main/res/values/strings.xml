@@ -68,10 +68,16 @@
             <string name="write_msg_error_log_OKnb">Contact found from number - OK</string>
             <string name="write_msg_error_log_direct_nb">Send direct number</string>
             <string name="write_msg_error_log_ambiguous">Ambiguous contact name</string>
-            <string name="write_msg_error_log_no_contact">no contact by this name</string>
+            <string name="write_msg_error_log_no_contact">No contact by this name</string>
 
    <!-- Read Messages page -->
     <string name="title_activity_readmsg">Read messages</string>
         <string name="readmsg_contact_name_label">Contact Name</string>
         <string name="readmsg_contact_nb_label">Contact Number</string>
+    <string name="title_activity_user_setting">UserSettingActivity</string>
+
+    <!-- Settings page -->
+    <string name="settings_header_color_select_label">Header color</string>
+    <string name="settings_header_color_select_summary">Select displayed header color</string>
+
 </resources>

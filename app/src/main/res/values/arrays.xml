@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="header_colors_array"
+        defaultValue="black">
+        <item name="black">black</item>
+        <item name="red">red</item>
+        <item name="blue">blue</item>
+        <item name="green">green</item>
+        <item name="yellow">yellow</item>
+    </string-array>
+</resources>

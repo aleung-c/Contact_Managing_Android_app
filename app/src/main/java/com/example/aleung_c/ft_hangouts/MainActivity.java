@@ -29,6 +29,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 //        assert actionBar != null;
 //        actionBar.setDisplayHomeAsUpEnabled(true);
 
+
+
         DatabaseHandler db = new DatabaseHandler(this);
         List<Contact> contacts = db.getAllContacts();
         ListView listContent = (ListView) findViewById(R.id.contact_listview);
@@ -57,6 +59,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, UserSettingActivity.class);
+            startActivity(i);
             return true;
         }
 

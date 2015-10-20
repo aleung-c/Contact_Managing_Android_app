@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent">
+
+    <PreferenceCategory android:title="@string/settings_header_color_select_label" >
+        <ListPreference
+            android:key="header_color"
+            android:entries="@array/header_colors_array"
+            android:summary="@string/settings_header_color_select_summary"
+            android:entryValues="@array/header_colors_array"
+            android:title="@string/settings_header_color_select_label" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
