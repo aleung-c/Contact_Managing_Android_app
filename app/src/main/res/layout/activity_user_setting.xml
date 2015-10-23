@@ -3,13 +3,17 @@
     android:layout_height="fill_parent"
     android:layout_width="fill_parent">
 
-    <PreferenceCategory android:title="@string/settings_header_color_select_label" >
+    <PreferenceCategory
+        android:title="@string/settings_header_color_select_label"
+        android:id="@+id/settings_listpref"
+        >
         <ListPreference
             android:key="header_color"
             android:entries="@array/header_colors_array"
             android:summary="@string/settings_header_color_select_summary"
             android:entryValues="@array/header_colors_array"
-            android:title="@string/settings_header_color_select_label" />
+            android:title="@string/settings_header_color_select_label"
+            />
     </PreferenceCategory>
 
 </PreferenceScreen>

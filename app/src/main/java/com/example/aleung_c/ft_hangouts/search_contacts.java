@@ -118,6 +118,10 @@ public class search_contacts extends Activity implements View.OnKeyListener {
     protected void onResume() {
         super.onResume();
         App_visibility.activityResumed();
+
+        // change action bar color
+        AppUtils utils = new AppUtils();
+        utils.set_actionbar_color(this);
     }
 
     @Override

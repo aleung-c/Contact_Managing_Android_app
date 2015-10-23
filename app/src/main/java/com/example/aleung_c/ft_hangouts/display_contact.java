@@ -136,6 +136,10 @@ public class display_contact extends Activity {
     protected void onResume() {
         super.onResume();
         App_visibility.activityResumed();
+
+        // change action bar color
+        AppUtils utils = new AppUtils();
+        utils.set_actionbar_color(this);
     }
 
     @Override

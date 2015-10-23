@@ -1,11 +1,15 @@
 package com.example.aleung_c.ft_hangouts;
 
+import android.content.SharedPreferences;
+import android.preference.ListPreference;
+import android.preference.PreferenceCategory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
         import android.os.Bundle;
         import android.preference.PreferenceActivity;
+import android.view.View;
 
 public class UserSettingActivity extends PreferenceActivity {
 
@@ -15,6 +19,7 @@ public class UserSettingActivity extends PreferenceActivity {
 
         addPreferencesFromResource(R.layout.activity_user_setting);
 
+        // TODO : add onclick listener
     }
 
     @Override
@@ -33,9 +38,28 @@ public class UserSettingActivity extends PreferenceActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // Set app visible or not.
+    @Override
+    protected void onResume() {
+        super.onResume();
+        App_visibility.activityResumed();
+
+        // change action bar color
+        AppUtils utils = new AppUtils();
+        utils.set_actionbar_color(this);
+    }
+
+    public void onclick_item(View v)
+    {
+        // change action bar color
+        AppUtils utils = new AppUtils();
+        utils.set_actionbar_color(this);
     }
 }

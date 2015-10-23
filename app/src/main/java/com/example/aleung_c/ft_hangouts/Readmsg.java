@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -46,6 +47,7 @@ public class Readmsg extends Activity {
         String myphonenb = tm.getLine1Number();
 
         List<Message> messages =  db.getAllMessagesfromId(id_to_display, myphonenb);
+
         LinearLayout msg_layout = (LinearLayout)findViewById(R.id.readmsg_msgbody);
         for( int i = 0; i < messages.size(); i++ )
         {
@@ -68,8 +70,16 @@ public class Readmsg extends Activity {
             msg_layout.addView(textView_date);
             msg_layout.addView(textView_msgbody);
         }
-        // TODO : pb lors de laffichage lorsquil y a trop de msg ...
-        msg_layout.getBottom();
+        // pour mettre la scrollview tout en bas.
+        final ScrollView scrollv = (ScrollView)findViewById(R.id.scroll_readmsg);
+        scrollv.post(new Runnable() {
+
+            @Override
+            public void run() {
+
+                scrollv.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
         db.close();
     }
 
@@ -108,6 +118,10 @@ public class Readmsg extends Activity {
     protected void onResume() {
         super.onResume();
         App_visibility.activityResumed();
+
+        // change action bar color
+        AppUtils utils = new AppUtils();
+        utils.set_actionbar_color(this);
     }
 
     @Override

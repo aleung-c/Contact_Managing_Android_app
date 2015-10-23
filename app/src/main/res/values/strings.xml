@@ -79,5 +79,9 @@
     <!-- Settings page -->
     <string name="settings_header_color_select_label">Header color</string>
     <string name="settings_header_color_select_summary">Select displayed header color</string>
-
+    <string name="val_black">black</string>
+    <string name="val_red">red</string>
+    <string name="val_blue">blue</string>
+    <string name="val_green">green</string>
+    <string name="val_yellow">yellow</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.aleung_c.ft_hangouts;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,11 +26,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        ActionBar actionBar = getActionBar();
-//        assert actionBar != null;
-//        actionBar.setDisplayHomeAsUpEnabled(true);
 
-
+        // change action bar color
+        AppUtils utils = new AppUtils();
+        utils.set_actionbar_color(this);
 
         DatabaseHandler db = new DatabaseHandler(this);
         List<Contact> contacts = db.getAllContacts();
@@ -40,6 +40,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         db.close();
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,8 +74,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 //        onDestroy();
 //        System.exit(0);
 //    }
-
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -120,6 +120,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     protected void onResume() {
         super.onResume();
         App_visibility.activityResumed();
+
+        // change action bar color
+        AppUtils utils = new AppUtils();
+        utils.set_actionbar_color(this);
     }
 
     @Override
