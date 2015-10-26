@@ -21,8 +21,8 @@ public class AppUtils extends Activity {
         SharedPreferences setval = PreferenceManager.getDefaultSharedPreferences(context);
         String colors = setval.getString("header_color", "DEFAULT");
 
-        // TODO : gerer le cas "color == default == > unset"
-        if (colors.equals("black"))
+        // TODO : gerer le cas "color == default == > unset" => FAIT, a test.
+        if (colors.isEmpty() || colors.equals("black"))
         {
             Activity activity = (Activity) context;
             ActionBar ab = activity.getActionBar();

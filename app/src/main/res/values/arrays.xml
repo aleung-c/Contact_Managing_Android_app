@@ -2,7 +2,8 @@
 <resources>
     <string-array
         name="header_colors_array"
-        defaultValue="black">
+        defaultValue="black"
+        >
         <item name="black">black</item>
         <item name="red">red</item>
         <item name="blue">blue</item>
