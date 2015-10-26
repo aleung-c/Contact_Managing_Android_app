@@ -31,7 +31,6 @@ public class UserSettingActivity extends PreferenceActivity {
                 startActivity(intent);
                 return true;
             }
-
         });
     }
 
