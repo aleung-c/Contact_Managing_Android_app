@@ -70,9 +70,10 @@ public class add_contact extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, UserSettingActivity.class);
+            startActivity(i);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -151,6 +152,20 @@ public class add_contact extends Activity {
     protected void onPause() {
         super.onPause();
         App_visibility.activityPaused();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App_visibility.activityPaused();
+        App_visibility.set_time();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        App_visibility.activityResumed();
+        App_visibility.display_time(this);
     }
 }
 

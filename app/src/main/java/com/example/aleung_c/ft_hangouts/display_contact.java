@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -59,9 +60,10 @@ public class display_contact extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, UserSettingActivity.class);
+            startActivity(i);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -128,6 +130,7 @@ public class display_contact extends Activity {
 
     public void back_to_list() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -146,5 +149,19 @@ public class display_contact extends Activity {
     protected void onPause() {
         super.onPause();
         App_visibility.activityPaused();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App_visibility.activityPaused();
+        App_visibility.set_time();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        App_visibility.activityResumed();
+        App_visibility.display_time(this);
     }
 }

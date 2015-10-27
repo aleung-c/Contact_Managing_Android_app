@@ -74,4 +74,18 @@ public class UserSettingActivity extends PreferenceActivity {
         AppUtils utils = new AppUtils();
         utils.set_actionbar_color(this);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App_visibility.activityPaused();
+        App_visibility.set_time();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        App_visibility.activityResumed();
+        App_visibility.display_time(this);
+    }
 }

@@ -97,11 +97,13 @@ public class Readmsg extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, UserSettingActivity.class);
+            startActivity(i);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -130,5 +132,17 @@ public class Readmsg extends Activity {
         App_visibility.activityPaused();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App_visibility.activityPaused();
+        App_visibility.set_time();
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        App_visibility.activityResumed();
+        App_visibility.display_time(this);
+    }
 }
