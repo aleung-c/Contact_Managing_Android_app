@@ -1,13 +1,10 @@
 package com.example.aleung_c.ft_hangouts;
 
-import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.telephony.TelephonyManager;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,10 +40,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // constructor
     public DatabaseHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
-    public DatabaseHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -164,47 +157,47 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) { // cursor on first element;
-            do {
-                Contact contact = new Contact();
-                contact.setId(Integer.parseInt(cursor.getString(0)));
-                contact.setName(cursor.getString(1));
-                contact.setPhonenb(cursor.getString(2));
-                contact.setOrganisation(cursor.getString(3));
-                contact.setRole(cursor.getString(4));
-                contact.setMail(cursor.getString(5));
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
-        }
+        // cursor on first element;
+        if (cursor.moveToFirst()) do {
+            Contact contact = new Contact();
+            contact.setId(Integer.parseInt(cursor.getString(0)));
+            contact.setName(cursor.getString(1));
+            contact.setPhonenb(cursor.getString(2));
+            contact.setOrganisation(cursor.getString(3));
+            contact.setRole(cursor.getString(4));
+            contact.setMail(cursor.getString(5));
+            // Adding contact to list
+            contactList.add(contact);
+        } while (cursor.moveToNext());
         cursor.close();
         return contactList;
     }
 
-    // get contacts from name - contains name
-    public List<Contact> getAllContactsfromName_contains(String name_asked) {
-        List<Contact> contactList = new ArrayList<>(); // list to return;
-        SQLiteDatabase db = this.getWritableDatabase(); // open db to fetch all contacts;
-        String selectQuery = "SELECT  * FROM " + TABLE +
-                " WHERE " + KEY_name +
-                " LIKE '%" + name_asked + "%'"; // SQL request;
-
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) { // cursor on first element;
-            do {
-                Contact contact = new Contact();
-                contact.setId(Integer.parseInt(cursor.getString(0)));
-                contact.setName(cursor.getString(1));
-                contact.setPhonenb(cursor.getString(2));
-
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return contactList;
-    }
+    // UNUSED, a conserver au cas ou.
+//    // get contacts from name - contains name
+//    public List<Contact> getAllContactsfromName_contains(String name_asked) {
+//        List<Contact> contactList = new ArrayList<>(); // list to return;
+//        SQLiteDatabase db = this.getWritableDatabase(); // open db to fetch all contacts;
+//        String selectQuery = "SELECT  * FROM " + TABLE +
+//                " WHERE " + KEY_name +
+//                " LIKE '%" + name_asked + "%'"; // SQL request;
+//
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+//        // looping through all rows and adding to list
+//        if (cursor.moveToFirst()) { // cursor on first element;
+//            do {
+//                Contact contact = new Contact();
+//                contact.setId(Integer.parseInt(cursor.getString(0)));
+//                contact.setName(cursor.getString(1));
+//                contact.setPhonenb(cursor.getString(2));
+//
+//                // Adding contact to list
+//                contactList.add(contact);
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        return contactList;
+//    }
 
     // get contacts from name - name start with
     public List<Contact> getAllContactsfromName_start(String name_asked) {
@@ -280,27 +273,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return contactList;
     }
 
-    // Getting contacts Count
-    public int getContactsCount() {
-        SQLiteDatabase db = this.getReadableDatabase(); // open db to fetch all contacts;
-        String countQuery = "SELECT  * FROM " + TABLE; // SQL request;
-        Cursor cursor = db.rawQuery(countQuery, null);
-        cursor.close();
+    // UNUSED, a conserver.
+//    // Getting contacts Count
+//    public int getContactsCount() {
+//        SQLiteDatabase db = this.getReadableDatabase(); // open db to fetch all contacts;
+//        String countQuery = "SELECT  * FROM " + TABLE; // SQL request;
+//        Cursor cursor = db.rawQuery(countQuery, null);
+//        cursor.close();
+//
+//        return cursor.getCount();
+//    }
 
-        return cursor.getCount();
-    }
-
-    // Getting contacts Count From phone number
-    public int getContactsCountFromNb(String nb_asked) {
-        SQLiteDatabase db = this.getReadableDatabase(); // open db to fetch all contacts;
-        String countQuery = "SELECT  * FROM " + TABLE +
-                " WHERE " + KEY_Phonenb +
-                " LIKE '" + nb_asked + "%' ORDER BY " + KEY_name; // SQL request;
-        Cursor cursor = db.rawQuery(countQuery, null);
-        cursor.close();
-
-        return cursor.getCount();
-    }
+    // UNUSED, a conserver.
+//    // Getting contacts Count From phone number
+//    public int getContactsCountFromNb(String nb_asked) {
+//        SQLiteDatabase db = this.getReadableDatabase(); // open db to fetch all contacts;
+//        String countQuery = "SELECT  * FROM " + TABLE +
+//                " WHERE " + KEY_Phonenb +
+//                " LIKE '" + nb_asked + "%' ORDER BY " + KEY_name; // SQL request;
+//        Cursor cursor = db.rawQuery(countQuery, null);
+//        cursor.close();
+//
+//        return cursor.getCount();
+//    }
 
     // Updating single contact
     public int updateContact(Contact contact) {

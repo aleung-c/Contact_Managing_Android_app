@@ -1,10 +1,8 @@
 package com.example.aleung_c.ft_hangouts;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.TypedValue;
@@ -12,16 +10,10 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
-import android.widget.TableRow;
 import android.widget.TextView;
-
 import java.util.List;
-
 
 public class Readmsg extends Activity {
 
@@ -32,7 +24,7 @@ public class Readmsg extends Activity {
         DatabaseHandler db = new DatabaseHandler(this);
 
         Intent intent = getIntent();
-        int id_to_display = (int) intent.getExtras().getInt("CONTACT_ID");
+        int id_to_display = intent.getExtras().getInt("CONTACT_ID");
         Contact contact_to_display = db.getContact(id_to_display);
 
         // Displaying infos //
@@ -53,16 +45,15 @@ public class Readmsg extends Activity {
         {
             TextView textView_date = new TextView(this); // affiche la date
             TextView textView_msgbody = new TextView(this); // affiche le body
-//            textView.setLayoutParams();
 
             textView_msgbody.setWidth(msg_layout.getWidth());
             if (messages.get(i).getSenderNb().equals(myphonenb)) {
-                textView_msgbody.setGravity(Gravity.RIGHT);
-                textView_date.setGravity(Gravity.RIGHT);
+                textView_msgbody.setGravity(Gravity.END);
+                textView_date.setGravity(Gravity.END);
             }
             else {
-                textView_msgbody.setGravity(Gravity.LEFT);
-                textView_date.setGravity(Gravity.LEFT);
+                textView_msgbody.setGravity(Gravity.START);
+                textView_date.setGravity(Gravity.START);
             }
             textView_date.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 11.0f);
             textView_date.setText(messages.get(i).getDate());
@@ -86,7 +77,7 @@ public class Readmsg extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_readmsg, menu);
+        getMenuInflater().inflate(R.menu.main_activity_actions, menu);
         return true;
     }
 
@@ -108,10 +99,11 @@ public class Readmsg extends Activity {
     }
 
     public void goto_write_msg(View v) {
-        Intent prev_intent = getIntent();
-        int id_to_pass = (int) prev_intent.getExtras().getInt("CONTACT_ID");
+        Intent prev_intent;
+        prev_intent = getIntent();
+        int id_to_pass = prev_intent.getExtras().getInt("CONTACT_ID");
         Intent intent = new Intent(this, write_msg.class);
-        intent.putExtra("WRITE_MSG_ID", (int) id_to_pass);
+        intent.putExtra("WRITE_MSG_ID",id_to_pass);
         startActivity(intent);
     }
 
@@ -135,14 +127,14 @@ public class Readmsg extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
-        App_visibility.activityPaused();
+        //App_visibility.activityPaused();
         App_visibility.set_time();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        App_visibility.activityResumed();
+        //App_visibility.activityResumed();
         App_visibility.display_time(this);
     }
 }

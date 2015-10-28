@@ -3,14 +3,9 @@ package com.example.aleung_c.ft_hangouts;
 import android.app.Application;
 import android.content.Context;
 import android.widget.Toast;
-
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by aleung-c on 28/09/15.
- */
 public class App_visibility extends Application {
     public static boolean isActivityVisible() {
         return activityVisible;

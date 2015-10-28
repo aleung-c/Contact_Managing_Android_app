@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -25,11 +28,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         // change action bar color
         AppUtils utils = new AppUtils();
         utils.set_actionbar_color(this);
-
         DatabaseHandler db = new DatabaseHandler(this);
         List<Contact> contacts = db.getAllContacts();
+
         ListView listContent = (ListView) findViewById(R.id.contact_listview);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, contacts);
+        MyAdapter adapter = new MyAdapter(this, R.layout.list_twofields, contacts);
         listContent.setAdapter(adapter);
         listContent.setOnItemClickListener(this);
         db.close();
@@ -128,7 +131,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     protected void onStop() {
         super.onStop();
-        App_visibility.activityPaused();
+//        App_visibility.activityPaused();
         App_visibility.set_time();
 
     }
@@ -136,7 +139,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     protected void onRestart() {
         super.onRestart();
-        App_visibility.activityResumed();
+//        App_visibility.activityResumed();
         App_visibility.display_time(this);
     }
 }

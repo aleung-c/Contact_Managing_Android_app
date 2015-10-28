@@ -2,7 +2,6 @@ package com.example.aleung_c.ft_hangouts;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,10 +22,13 @@ public class add_contact extends Activity {
 
         DatabaseHandler db = new DatabaseHandler(this);
 
-        Intent intent = getIntent();
-        if (getIntent().getExtras().getString("ADDCONTACT_ACTION").equals("EDIT")) {
+        Intent intent;
+        intent = getIntent();
+        String action = getIntent().getExtras().getString("ADDCONTACT_ACTION");
+        assert action != null;
+        if (action.equals("EDIT")) {
             setTitle(R.string.title_activity_edit_contact);
-            int id_to_display = (int) intent.getExtras().getInt("EDITCONTACT_ID");
+            int id_to_display = intent.getExtras().getInt("EDITCONTACT_ID");
             Contact contact_to_display = db.getContact(id_to_display);
 
             // Displaying infos //
@@ -56,8 +58,7 @@ public class add_contact extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_contact, menu);
+        // No menu
         return true;
     }
 
@@ -82,14 +83,11 @@ public class add_contact extends Activity {
 
 
        Contact contact_added = new Contact();
-
-
        EditText name_field = (EditText) findViewById(R.id.name_field);
        EditText number_field = (EditText) findViewById(R.id.number_field);
        EditText orga_field = (EditText) findViewById(R.id.orga_field);
        EditText role_field = (EditText) findViewById(R.id.role_field);
        EditText mail_field = (EditText) findViewById(R.id.mail_field);
-
        if (are_fields_OK(name_field, number_field))
        {
            // set contact values
@@ -99,10 +97,12 @@ public class add_contact extends Activity {
            contact_added.setRole(role_field.getText().toString());
            contact_added.setMail(mail_field.getText().toString());
 
-           if (getIntent().getExtras().getString("ADDCONTACT_ACTION").equals("ADD")) {
+           String action = getIntent().getExtras().getString("ADDCONTACT_ACTION");
+           assert action != null;
+           if (action.equals("ADD")) {
                db.addContact(contact_added);
            }
-           else if (getIntent().getExtras().getString("ADDCONTACT_ACTION").equals("EDIT"))
+           else if (action.equals("EDIT"))
            {
                // set contact id for updating
                contact_added.setId(db.getContact(getIntent().getExtras().getInt("EDITCONTACT_ID")).getId());
@@ -121,17 +121,19 @@ public class add_contact extends Activity {
         TextView error_text = (TextView) findViewById(R.id.add_contact_error_text);
 
         // check fields empty ou null;
-        if (name_field.getText().toString() == null || name_field.getText().toString().isEmpty()
-                || number_field.getText().toString() == null
-                || number_field.getText().toString().isEmpty()) {
+        if (name_field.getText().toString().isEmpty() || number_field.getText().toString().isEmpty()) {
             error_text.setText(R.string.add_contact_fields_empty);
             return false;
         }
         // check nb already exist;
-        List<Contact> search_nb = db.getAllContactsfromPhonenb(number_field.getText().toString());
-        if (search_nb.size() != 0) {
-            error_text.setText(R.string.add_contact_nb_exist);
-            return false;
+        String action = getIntent().getExtras().getString("ADDCONTACT_ACTION");
+        assert action != null;
+        if (action.equals("ADD")) {
+            List<Contact> search_nb = db.getAllContactsfromPhonenb(number_field.getText().toString());
+            if (search_nb.size() != 0) {
+                error_text.setText(R.string.add_contact_nb_exist);
+                return false;
+            }
         }
         error_text.setText("");
         return true;
@@ -157,14 +159,14 @@ public class add_contact extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
-        App_visibility.activityPaused();
+            //App_visibility.activityPaused();
         App_visibility.set_time();
-    }
+        }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        App_visibility.activityResumed();
+            //App_visibility.activityResumed();
         App_visibility.display_time(this);
     }
 }
