@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -20,7 +19,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -82,13 +80,17 @@ public class write_msg extends Activity implements View.OnKeyListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // No menu.
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.menu_write_msg, menu);
 
         return true;
     }
 
     private void click_send_msg(final Contact dest) {
         // lorsque click sur le btn send.
+
+
+
         final DatabaseHandler db = new DatabaseHandler(this);
         Button submit_btn = (Button) findViewById(R.id.write_msg_submit_btn);
         final AutoCompleteTextView actview = (AutoCompleteTextView) findViewById(R.id.write_msg_name_select);
@@ -203,16 +205,14 @@ public class write_msg extends Activity implements View.OnKeyListener {
         msg_to_send.setSendName("Me");
         msg_to_send.setSendNb(myphonenb);
         db.addMessage(msg_to_send);
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(dest.getPhonenb(), null, msg_to_send.toString(), null, null);
-            Toast.makeText(getApplicationContext(), "Message Sent",
-                    Toast.LENGTH_LONG).show();
-        } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
-                    Toast.LENGTH_LONG).show();
-            ex.printStackTrace();
-        }
+
+        // TODO : SEND CMD SMS. < ====== PAS BON...
+        Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+        i.putExtra("address", msg_to_send.getDestNb());
+        i.putExtra("sms_body", msg_to_send.getMsgBody());
+        i.setType("vnd.android-dir/mms-sms");
+        startActivity(i);
+
         db.close();
     }
 
@@ -230,12 +230,16 @@ public class write_msg extends Activity implements View.OnKeyListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent i = new Intent(this, UserSettingActivity.class);
-            startActivity(i);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -261,21 +265,6 @@ public class write_msg extends Activity implements View.OnKeyListener {
         super.onPause();
         App_visibility.activityPaused();
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        //App_visibility.activityPaused();
-        App_visibility.set_time();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        //App_visibility.activityResumed();
-        App_visibility.display_time(this);
-    }
-
 }
 
 

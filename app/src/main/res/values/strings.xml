@@ -74,10 +74,9 @@
     <string name="title_activity_readmsg">Read messages</string>
         <string name="readmsg_contact_name_label">Contact Name</string>
         <string name="readmsg_contact_nb_label">Contact Number</string>
-    <string name="title_activity_user_setting">User Settings</string>
+    <string name="title_activity_user_setting">UserSettingActivity</string>
 
     <!-- Settings page -->
-    <string name="action_bar_settings_text">Settings</string>
     <string name="settings_header_color_select_label">Header color</string>
     <string name="settings_header_color_select_summary">Select displayed header color</string>
     <string name="val_black">black</string>

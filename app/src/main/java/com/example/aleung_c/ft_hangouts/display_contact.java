@@ -1,15 +1,18 @@
 package com.example.aleung_c.ft_hangouts;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.content.IntentCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 
 public class display_contact extends Activity {
 
@@ -20,7 +23,7 @@ public class display_contact extends Activity {
         DatabaseHandler db = new DatabaseHandler(this);
 
         Intent intent = getIntent();
-        int id_to_display = intent.getExtras().getInt("CONTACT_ID");
+        int id_to_display = (int) intent.getExtras().getInt("CONTACT_ID");
         Contact contact_to_display = db.getContact(id_to_display);
 
         // Displaying infos //
@@ -43,7 +46,7 @@ public class display_contact extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_activity_actions, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -56,18 +59,21 @@ public class display_contact extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent i = new Intent(this, UserSettingActivity.class);
-            startActivity(i);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    public void Onclick_edit(View v) {
+
     }
 
     public void Onclick_delete(View v) {
         final DatabaseHandler db = new DatabaseHandler(this);
 
         Intent intent = getIntent();
-        int id_to_display = intent.getExtras().getInt("CONTACT_ID");
+        int id_to_display = (int) intent.getExtras().getInt("CONTACT_ID");
         final Contact contact_to_display = db.getContact(id_to_display);
 
         // alert dialog
@@ -95,15 +101,15 @@ public class display_contact extends Activity {
 
     public void goto_write_msg(View v) {
         Intent prev_intent = getIntent();
-        int id_to_pass = prev_intent.getExtras().getInt("CONTACT_ID");
+        int id_to_pass = (int) prev_intent.getExtras().getInt("CONTACT_ID");
         Intent intent = new Intent(this, write_msg.class);
-        intent.putExtra("WRITE_MSG_ID", id_to_pass);
+        intent.putExtra("WRITE_MSG_ID", (int) id_to_pass);
         startActivity(intent);
     }
 
     public void goto_readmsg(View v) {
         Intent prev_intent = getIntent();
-        int id_to_display = prev_intent.getExtras().getInt("CONTACT_ID");
+        int id_to_display = (int) prev_intent.getExtras().getInt("CONTACT_ID");
         Intent intent = new Intent(this, Readmsg.class);
         intent.putExtra("CONTACT_ID", id_to_display);
         startActivity(intent);
@@ -111,10 +117,10 @@ public class display_contact extends Activity {
 
     public void goto_edit_contact(View v) {
         Intent prev_intent = getIntent();
-        int id_to_display = prev_intent.getExtras().getInt("CONTACT_ID");
+        int id_to_display = (int) prev_intent.getExtras().getInt("CONTACT_ID");
         Intent intent = new Intent(this, add_contact.class);
         intent.putExtra("ADDCONTACT_ACTION", "EDIT");
-        intent.putExtra("EDITCONTACT_ID", id_to_display);
+        intent.putExtra("EDITCONTACT_ID", (int) id_to_display);
         startActivity(intent);
     }
 
@@ -122,7 +128,6 @@ public class display_contact extends Activity {
 
     public void back_to_list() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -141,19 +146,5 @@ public class display_contact extends Activity {
     protected void onPause() {
         super.onPause();
         App_visibility.activityPaused();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        //App_visibility.activityPaused();
-        App_visibility.set_time();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        //App_visibility.activityResumed();
-        App_visibility.display_time(this);
     }
 }

@@ -13,7 +13,6 @@
             android:summary="@string/settings_header_color_select_summary"
             android:entryValues="@array/header_colors_array"
             android:title="@string/settings_header_color_select_label"
-
             />
     </PreferenceCategory>
 

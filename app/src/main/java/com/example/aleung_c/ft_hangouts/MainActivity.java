@@ -2,6 +2,7 @@ package com.example.aleung_c.ft_hangouts;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,11 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
+import android.app.ActionBar;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -28,16 +30,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         // change action bar color
         AppUtils utils = new AppUtils();
         utils.set_actionbar_color(this);
+
         DatabaseHandler db = new DatabaseHandler(this);
         List<Contact> contacts = db.getAllContacts();
-
         ListView listContent = (ListView) findViewById(R.id.contact_listview);
-        MyAdapter adapter = new MyAdapter(this, R.layout.list_twofields, contacts);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, contacts);
         listContent.setAdapter(adapter);
         listContent.setOnItemClickListener(this);
         db.close();
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,14 +78,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        String name = parent.getItemAtPosition(position).toString();
+        String name = (String) parent.getItemAtPosition(position).toString();
         Contact contact = (Contact) parent.getItemAtPosition(position);
         int id_to_display = contact.getId();
 
         Intent intent = new Intent(this, display_contact.class);
 
         intent.putExtra("CONTACT_NAME", name);
-        intent.putExtra("CONTACT_ID", id_to_display);
+        intent.putExtra("CONTACT_ID", (int)id_to_display);
         startActivity(intent);
     }
 
@@ -127,19 +131,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         super.onPause();
         App_visibility.activityPaused();
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-//        App_visibility.activityPaused();
-        App_visibility.set_time();
-
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-//        App_visibility.activityResumed();
-        App_visibility.display_time(this);
-    }
 }
+
+

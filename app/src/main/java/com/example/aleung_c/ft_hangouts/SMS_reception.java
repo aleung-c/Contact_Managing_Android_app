@@ -1,5 +1,6 @@
 package com.example.aleung_c.ft_hangouts;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -7,9 +8,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
+
 import java.util.List;
 
 public class SMS_reception extends BroadcastReceiver {
@@ -28,12 +33,17 @@ public class SMS_reception extends BroadcastReceiver {
         if (bundle != null) {
 
             final Object[] pdusObj = (Object[]) bundle.get("pdus");
-            assert pdusObj != null;
-            for (Object aPdusObj : pdusObj) {
-                SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) aPdusObj);
-                String senderNum = currentMessage.getDisplayOriginatingAddress();
+            Contact send = new Contact();
+
+            for (int i = 0; i < pdusObj.length; i++) {
+
+                SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
+                String phoneNumber = currentMessage.getDisplayOriginatingAddress();
+
+                String senderNum = phoneNumber;
                 String message = currentMessage.getDisplayMessageBody();
 
+//                Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
                 // ==> Stock message in db.
                 receive_msg(context, senderNum, message);
                 // Show alert
@@ -48,11 +58,14 @@ public class SMS_reception extends BroadcastReceiver {
                     db.close();
                     newintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(newintent);
-                } else
+                }
+                else
+                {
                     pop_notification(context, senderNum, message);
+                }
                 db.close();
-            }
-        }
+            } // end for loop
+        } // bundle is null
     }
 
     private void receive_msg(Context context, String senderNum, String msg_body) {

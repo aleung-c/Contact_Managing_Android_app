@@ -12,7 +12,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#bfc3ca"
-        android:layout_weight="0.20"
         android:padding="3dp">
 
         <LinearLayout
@@ -44,16 +43,14 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:orientation="horizontal">
 
             <ListView
                 android:id="@+id/contact_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-                android:layout_marginTop="20dp"
-                />
+                android:layout_weight="1"
+                android:layout_marginTop="20dp" />
             <!-- pour changer la couleur, faire un list layout -->
         </LinearLayout>
 
@@ -62,10 +59,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="right"
-            android:layout_weight="0.10"
             android:layout_below="@id/contact_listview">
 
-            <!-- Go to writemsg activity button -->
+            <!-- Go to search contact activity button -->
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,6 +70,8 @@
                 android:onClick="goto_write_msg"
                 android:text="@string/write_msg_btn" />
         </RelativeLayout>
+
     </LinearLayout>
+
 </RelativeLayout>
 

@@ -3,6 +3,9 @@ package com.example.aleung_c.ft_hangouts;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Created by aleung-c on 10/09/15.
+ */
 public class Message {
     int _message_id;
     String _date;

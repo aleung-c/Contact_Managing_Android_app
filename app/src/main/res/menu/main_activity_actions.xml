@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/action_settings"
-        android:title="@string/action_bar_settings_text"
+        android:title="Settings"
         android:orderInCategory="100"
         android:icon="@mipmap/ic_launcher42"
         yourapp:showAsAction="ifRoom|"/>

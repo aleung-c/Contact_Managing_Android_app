@@ -2,12 +2,11 @@
 <resources>
     <string-array
         name="header_colors_array"
-        defaultValue="black"
-        >
-        <item name="black">Black</item>
-        <item name="red">Red</item>
-        <item name="blue">Blue</item>
-        <item name="green">Green</item>
-        <item name="yellow">Yellow</item>
+        defaultValue="black">
+        <item name="black">black</item>
+        <item name="red">red</item>
+        <item name="blue">blue</item>
+        <item name="green">green</item>
+        <item name="yellow">yellow</item>
     </string-array>
 </resources>
