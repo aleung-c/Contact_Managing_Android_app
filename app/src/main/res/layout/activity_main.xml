@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="right"
-            android:layout_weight="0.15"
+            android:layout_weight="0.10"
             android:layout_below="@id/contact_listview">
 
             <!-- Go to writemsg activity button -->
