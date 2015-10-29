@@ -1,52 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ft_hangouts</string>
 
     <!-- Top Action bar -->
-
     <string name="action_search">action search</string>
+    <string name="action_settings">Settings</string>
 
     <!-- Main activity -->
     <!-- Display contact list -->
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Préférences</string>
-    <string name="buttontest1">Ajouter un nom</string>
-    <string name="hint">Nom</string>
+    <string name="hint">Un nom</string>
 
-    <string name="title_activity_display_contacts">Afficher les contacts</string>
+    <string name="title_activity_display_contacts">Afficher contacts</string>
+    <!-- Buttons -->
     <string name="display_contacts_btn">Chercher un contact</string>
     <string name="add_contact_btn">Ajouter un contact</string>
-
     <string name="write_msg_btn">Nouveau message</string>
 
-
+    <!-- Search page -->
+    <string name="title_activity_search_contacts">Chercher un contact</string>
+    <string name="search_page_submit_btn">Search</string>
 
     <!-- Contact Management activity -->
     <string name="title_activity_add_contact">Ajouter un contact</string>
-    <string name="title_activity_edit_contact">Editer le contact</string>
-
+    <string name="title_activity_edit_contact">Editer contact</string>
     <string name="edit_contact_page_intro">Editer les informations</string>
-    <string name="add_contact_page_intro">Ajouter un nouveau contact</string>
-    <string name="add_contact_name_label">Nom:</string>
-    <string name="add_contact_nb_label">Num tel :</string>
-    <string name="confirm_add_btn">Ajouter un contact</string>
-    <string name="confirm_edit_btn">Editer</string>
-
-    <string name="add_contact_fields_empty">Des champs sont incomplets !</string>
+    <string name="add_contact_page_intro">Ajouter un contact</string>
+    <string name="add_contact_name_label">Nom :*</string>
+    <string name="add_contact_nb_label">Numéro tel :*</string>
+    <string name="add_contact_orga_label">Organisation :</string>
+    <string name="add_contact_role_label">Role :</string>
+    <string name="add_contact_mail_label">mail :</string>
+    <string name="confirm_add_btn">Ajouter contact</string>
+    <string name="confirm_edit_btn">Editer contact</string>
+    <!-- Error logs Display one contact -->
+    <string name="add_contact_fields_empty">Des champs sont vides !</string>
+    <string name="add_contact_nb_exist">Le numéro est deja utilisé !</string>
 
     <!-- Display one contact -->
-    <string name="title_activity_display_contact">Page contact</string>
+    <string name="title_activity_display_contact">Afficher Contact</string>
     <string name="display_contact_page_title">Page contact</string>
-    <string name="display_contact_name_label">Nom:</string>
-    <string name="display_contact_nb_label">Num tel :</string>
-    <string name="display_contact_edit_btn">Editer le contact</string>
-    <string name="display_contact_delete_btn">Supprimer Contact</string>
-
-    <string name="Delete_window_title">Supprimer contact ?</string>
-    <string name="Delete_window_msg">Etes vous sur de vouloir supprimer le contact ?</string>
+    <string name="display_contact_name_label">Nom :</string>
+    <string name="display_contact_nb_label">Numéro tel :</string>
+    <string name="display_contact_orga_label">Organisation :</string>
+    <string name="display_contact_role_label">Role :</string>
+    <string name="display_contact_mail_label">Mail :</string>
+    <!-- Buttons -->
+    <string name="display_contact_write_msg_btn">Envoyer message</string>
+    <string name="display_contact_readmsg_btn">Lire les messages</string>
+    <string name="display_contact_edit_btn">Editer Contact</string>
+    <string name="display_contact_delete_btn">Effacer contact</string>
+    <string name="Delete_window_title">Effacer contact ?</string>
+    <string name="Delete_window_msg">Etes-vous sur de vouloir supprimer ce contact ?</string>
     <string name="txt_yes">Oui</string>
     <string name="txt_no">Non</string>
 
     <!-- write new message activity -->
-    <string name="title_activity_write_msg">Ecrire un message</string>
+    <string name="title_activity_write_msg">Ecrire Message</string>
+    <string name="write_msg_contact_label">Destinataire :</string>
+    <string name="write_msg_bodytext_label">Corps de texte :</string>
+    <string name="write_msg_search_hint">Entrer le nom ou numéro ...</string>
+    <string name="write_msg_submit_btn">Envoyer</string>
+    <!-- user error messages -->
+    <string name="write_msg_error_log_OK">Contact trouvé - OK</string>
+    <string name="write_msg_error_log_OKnb">Contact trouvé d\'après numéro - OK</string>
+    <string name="write_msg_error_log_direct_nb">Envoi direct à un numéro</string>
+    <string name="write_msg_error_log_ambiguous">Nom de contact ambigue</string>
+    <string name="write_msg_error_log_no_contact">Aucun contact de ce nom</string>
+
+    <!-- Read Messages page -->
+    <string name="title_activity_readmsg">Lire les messages</string>
+    <string name="readmsg_contact_name_label">Nom du contact :</string>
+    <string name="readmsg_contact_nb_label">Numéro du contact :</string>
+    <string name="title_activity_user_setting">Préférences utilisateur</string>
+
+    <!-- Settings page -->
+    <string name="action_bar_settings_text">Préférences</string>
+    <string name="settings_header_color_select_label">Couleur de l\'entête</string>
+    <string name="settings_header_color_select_summary">Selectionner une couleur</string>
+    <string name="val_black">Noir</string>
+    <string name="val_red">Rouge</string>
+    <string name="val_blue">Bleu</string>
+    <string name="val_green">Vert</string>
+    <string name="val_yellow">Jaune</string>
 </resources>

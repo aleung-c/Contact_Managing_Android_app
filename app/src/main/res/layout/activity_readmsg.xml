@@ -13,29 +13,30 @@
         android:orientation="vertical">
 
         <!-- Page Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginBottom="15dp"
-            android:text="@string/title_activity_readmsg"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_marginBottom="15dp"-->
+            <!--android:text="@string/title_activity_readmsg"/>-->
 
         <!-- Contact name -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/readmsg_contact_name_label"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/readmsg_contact_name_label"/>-->
         <TextView
             android:id="@+id/readmsg_contact_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:layout_marginLeft="8dp"/>
 
         <!-- Contact number -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/readmsg_contact_nb_label"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/readmsg_contact_nb_label"/>-->
         <TextView
             android:id="@+id/readmsg_contact_nb"
             android:layout_width="wrap_content"
@@ -49,7 +50,9 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:scrollbars="none"
-            android:layout_weight="0.30">
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.20">
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -65,7 +68,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="0.70"
+            android:layout_weight="0.30"
             >
             <Button
                 android:layout_width="fill_parent"
@@ -78,4 +81,5 @@
                 android:layout_gravity="bottom" />
         </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>
