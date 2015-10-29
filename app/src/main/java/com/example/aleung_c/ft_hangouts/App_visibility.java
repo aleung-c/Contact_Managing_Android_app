@@ -27,7 +27,7 @@ public class App_visibility extends Application {
     }
 
     public static void display_time(Context context) {
-        Toast.makeText(context, "App last paused on " + time, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, time, Toast.LENGTH_SHORT).show();
     }
 
     private static boolean activityVisible;
