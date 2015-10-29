@@ -1,9 +1,5 @@
 package com.example.aleung_c.ft_hangouts;
 
-/**
- * Created by aleung-c on 10/08/15.
- */
-
 public class Contact {
     int _contact_id;
     String _contact_name;

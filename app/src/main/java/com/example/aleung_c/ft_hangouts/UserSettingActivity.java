@@ -1,8 +1,12 @@
 package com.example.aleung_c.ft_hangouts;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceCategory;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,8 +22,16 @@ public class UserSettingActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.layout.activity_user_setting);
-
-        // TODO : add onclick listener
+        final ListPreference mylistpref = (ListPreference) findPreference("header_color");
+        final Context context = this;
+        mylistpref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -61,5 +73,19 @@ public class UserSettingActivity extends PreferenceActivity {
         // change action bar color
         AppUtils utils = new AppUtils();
         utils.set_actionbar_color(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        App_visibility.activityPaused();
+        App_visibility.set_time();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        App_visibility.activityResumed();
+        App_visibility.display_time(this);
     }
 }

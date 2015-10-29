@@ -1,6 +1,7 @@
 package com.example.aleung_c.ft_hangouts;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,16 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import java.util.List;
 
-
-public class search_contacts extends Activity implements View.OnKeyListener {
+public class search_contacts extends Activity implements View.OnKeyListener, AdapterView.OnItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +84,28 @@ public class search_contacts extends Activity implements View.OnKeyListener {
         ListView listContent = (ListView) findViewById(R.id.contact_listview);
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, contacts);
         listContent.setAdapter(adapter);
+        listContent.setOnItemClickListener(this);
         db.close();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        String name = parent.getItemAtPosition(position).toString();
+        Contact contact = (Contact) parent.getItemAtPosition(position);
+        int id_to_display = contact.getId();
+
+        Intent intent = new Intent(this, display_contact.class);
+
+        intent.putExtra("CONTACT_NAME", name);
+        intent.putExtra("CONTACT_ID", id_to_display);
+        startActivity(intent);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_display_contacts, menu);
+        getMenuInflater().inflate(R.menu.main_activity_actions, menu);
         return true;
     }
 
@@ -105,8 +116,11 @@ public class search_contacts extends Activity implements View.OnKeyListener {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, UserSettingActivity.class);
+            startActivity(i);
             return true;
         }
 
@@ -130,4 +144,17 @@ public class search_contacts extends Activity implements View.OnKeyListener {
         App_visibility.activityPaused();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //App_visibility.activityPaused();
+        App_visibility.set_time();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //App_visibility.activityResumed();
+        App_visibility.display_time(this);
+    }
 }
