@@ -1,7 +1,20 @@
+### Android ###
+# Built application files
+*.apk
+*.ap_
+
+# Gradle files
 .gradle
-/local.properties
+/build
+
+# Log Files
+*.log
+
+# Android Studio Navigation editor temp files
+.navigation/
+
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
-/build
+
 /captures
